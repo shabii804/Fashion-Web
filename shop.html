@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shop - LuxeHer</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo">Luxe<span>Her</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html" class="active">Shop</a></li>
+    <li><a href="index.html#about-section">About</a></li>
+    <li><a href="index.html#contact-section">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-icons">
+      <a href="#" class="nav-icon-btn" aria-label="Search"><i class="fas fa-search"></i></a>
+      <a href="#" class="nav-icon-btn" aria-label="Account"><i class="fas fa-user"></i></a>
+      <a href="wishlist.html" class="nav-icon-btn wishlist-icon" aria-label="Wishlist">
+        <i class="fas fa-heart"></i>
+        <span class="wishlist-count">0</span>
+      </a>
+      <a href="cart.html" class="nav-icon-btn cart-icon" aria-label="Cart">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+    <div class="hamburger" aria-label="Menu"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"><i class="fas fa-home"></i> Home</a>
+  <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+  <a href="index.html#about-section"><i class="fas fa-info-circle"></i> About</a>
+  <a href="index.html#contact-section"><i class="fas fa-envelope"></i> Contact</a>
+  <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+  <a href="cart.html"><i class="fas fa-shopping-bag"></i> Cart</a>
+</div>
+
+<div class="page-banner shop-hero">
+  <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80" alt="Fashion boutique rail" />
+  <div class="page-banner-inner">
+    <span class="section-tag">New Season Edit</span>
+    <h1>Shop The Collection</h1>
+    <p>Modern dresses, tops, denim, handbags, shoes, and jackets curated for a polished everyday wardrobe.</p>
+  </div>
+</div>
+
+<main class="shop-section">
+  <div class="shop-filter-tabs fade-in" aria-label="Product categories"></div>
+
+  <div class="shop-filters fade-in">
+    <div class="filter-group">
+      <span class="filter-label">Sort by:</span>
+      <select class="filter-select" id="sortFilter" aria-label="Sort products">
+        <option value="default">Latest</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+        <option value="popular">Most Popular</option>
+      </select>
+    </div>
+    <div class="shop-results-count">
+      Showing <span id="resultsCount">0</span> products
+    </div>
+  </div>
+
+  <div class="shop-grid" id="shopGrid" aria-live="polite"></div>
+
+  <div class="shop-no-results hidden" id="shopNoResults">
+    <i class="fas fa-search"></i>
+    <p>No products found in this category.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-newsletter">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="newsletter-text">
+          <h4>Stay In The Loop</h4>
+          <p>Get the latest trends, exclusive offers and style inspiration in your inbox.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a href="index.html" class="footer-logo">Luxe<span>Her</span></a>
+          <p class="footer-brand-desc">Where elegance meets everyday. Curated fashion for the modern woman who believes style is a form of self-expression.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="shop.html"><i class="fas fa-chevron-right"></i> Shop All</a></li>
+            <li><a href="index.html#about-section"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="index.html#contact-section"><i class="fas fa-chevron-right"></i> Contact</a></li>
+            <li><a href="wishlist.html"><i class="fas fa-chevron-right"></i> Wishlist</a></li>
+            <li><a href="cart.html"><i class="fas fa-chevron-right"></i> Cart</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Categories</h5>
+          <ul class="footer-links">
+            <li><a href="#" class="shop-cat-link" data-filter="dresses"><i class="fas fa-chevron-right"></i> Dresses</a></li>
+            <li><a href="#" class="shop-cat-link" data-filter="tops"><i class="fas fa-chevron-right"></i> Tops</a></li>
+            <li><a href="#" class="shop-cat-link" data-filter="jeans"><i class="fas fa-chevron-right"></i> Jeans</a></li>
+            <li><a href="#" class="shop-cat-link" data-filter="handbags"><i class="fas fa-chevron-right"></i> Handbags</a></li>
+            <li><a href="#" class="shop-cat-link" data-filter="shoes"><i class="fas fa-chevron-right"></i> Shoes</a></li>
+            <li><a href="#" class="shop-cat-link" data-filter="jackets"><i class="fas fa-chevron-right"></i> Jackets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Support</h5>
+          <ul class="footer-links">
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Size Guide</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Shipping Info</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Returns</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Track Your Order</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Customer Care</h5>
+          <ul class="footer-contact-list">
+            <li><span class="fc-icon"><i class="fas fa-map-marker-alt"></i></span><span>123 Fashion Street, New York</span></li>
+            <li><span class="fc-icon"><i class="fas fa-phone-alt"></i></span><span>+1 254 567 8900</span></li>
+            <li><span class="fc-icon"><i class="fas fa-envelope"></i></span><span>support@luxeher.com</span></li>
+            <li><span class="fc-icon"><i class="fas fa-clock"></i></span><span>Mon-Fri: 9am - 6pm</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">Copyright 2026 <strong>LuxeHer</strong>. All Rights Reserved.</p>
+        <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<button class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<script src="js/script.js"></script>
+</body>
+</html>
