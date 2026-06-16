@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Search – LuxeHer</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+/* ════════════════════════════
+   SEARCH PAGE – Enhanced Styles
+════════════════════════════ */
+
+/* ── Hero ── */
+.search-hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--beige) 0%, #f7eee9 50%, var(--blush) 100%);
+  padding: 32px 40px 24px;
+  text-align: center;
+  overflow: hidden;
+}
+.search-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,132,143,0.13) 0%, transparent 70%);
+  pointer-events: none;
+}
+.search-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -40px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,132,143,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+.search-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--rose);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: rgba(201,132,143,0.1);
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(201,132,143,0.2);
+}
+.search-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+.search-hero-title span { color: var(--rose); font-style: italic; }
+
+/* ── Search bar ── */
+.search-bar-wrap { max-width: 620px; margin: 0 auto 16px; position: relative; }
+.search-bar-form {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 7px 7px 7px 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  gap: 8px;
+}
+.search-bar-form:focus-within {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 4px rgba(201,132,143,0.12), 0 8px 32px rgba(0,0,0,0.08);
+}
+.search-bar-icon { color: var(--rose); font-size: 0.95rem; flex-shrink: 0; }
+.search-bar-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.97rem;
+  color: var(--dark);
+  background: transparent;
+  min-width: 0;
+  padding: 4px 0;
+}
+.search-bar-input::placeholder { color: #c0b8b4; }
+.search-bar-clear {
+  background: var(--beige);
+  border: none;
+  cursor: pointer;
+  color: var(--light-text);
+  font-size: 0.75rem;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.search-bar-clear.visible { display: flex; }
+.search-bar-clear:hover { background: var(--rose); color: #fff; }
+.search-bar-btn {
+  background: var(--rose);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 11px 28px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  flex-shrink: 0;
+}
+.search-bar-btn:hover {
+  background: var(--rose-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(201,132,143,0.38);
+}
+
+/* ── Recent searches row ── */
+.search-recent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  min-height: 26px;
+}
+.search-recent-label {
+  font-size: 0.7rem;
+  color: var(--light-text);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.recent-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 13px;
+  background: rgba(201,132,143,0.1);
+  border: 1px solid rgba(201,132,143,0.22);
+  border-radius: var(--radius-pill);
+  font-size: 0.74rem;
+  color: var(--rose-dark);
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+.recent-tag:hover { background: var(--rose); color: #fff; border-color: var(--rose); }
+.recent-tag-remove {
+  font-size: 0.6rem;
+  opacity: 0.6;
+  margin-left: 2px;
+  transition: opacity 0.2s;
+}
+.recent-tag:hover .recent-tag-remove { opacity: 1; }
+
+/* ── Category pills ── */
+.search-cats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.search-cats-label {
+  font-size: 0.68rem;
+  color: var(--light-text);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin-right: 2px;
+}
+.cat-pill {
+  padding: 6px 18px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 0.77rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cat-pill i { font-size: 0.7rem; color: var(--rose); }
+.cat-pill:hover,
+.cat-pill.active {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: #fff;
+}
+.cat-pill.active i,
+.cat-pill:hover i { color: rgba(255,255,255,0.85); }
+
+/* ── Body ── */
+.search-body {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 28px 40px 60px;
+}
+
+/* ── Controls bar ── */
+.search-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 30px;
+  padding: 14px 20px;
+  background: var(--beige);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.search-results-info { font-size: 0.82rem; color: var(--text); }
+.search-results-info strong { color: var(--rose); font-weight: 700; }
+.search-controls-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.ctrl-group { display: flex; align-items: center; gap: 8px; }
+.ctrl-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--dark);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.ctrl-select {
+  padding: 7px 28px 7px 11px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.8rem;
+  color: var(--dark);
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E") no-repeat right 9px center;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.25s;
+}
+.ctrl-select:focus { border-color: var(--rose); }
+.ctrl-divider { width: 1px; height: 22px; background: var(--border); }
+
+/* View toggle */
+.view-toggle { display: flex; gap: 4px; }
+.view-btn {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; color: var(--light-text);
+  background: #fff;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all 0.22s;
+}
+.view-btn.active, .view-btn:hover { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+/* ── Results grid ── */
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.search-results-grid.list-view {
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.search-results-grid.list-view .product-card {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  align-items: center;
+  gap: 0;
+  border-radius: var(--radius-sm);
+}
+.search-results-grid.list-view .product-img-wrap {
+  height: 160px;
+  aspect-ratio: unset;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+.search-results-grid.list-view .product-info { padding: 16px 20px; }
+.search-results-grid.list-view .product-card-atc {
+  width: auto;
+  margin: 0 18px 0 0;
+  padding: 10px 20px;
+  white-space: nowrap;
+}
+
+/* ── Price range slider wrapper ── */
+.price-range-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.price-range-label { font-size: 0.78rem; color: var(--text); white-space: nowrap; }
+.price-range-label span { color: var(--rose); font-weight: 700; }
+.price-slider {
+  -webkit-appearance: none;
+  width: 110px; height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--rose) 0%, var(--rose) 100%, var(--border) 100%);
+  outline: none;
+  cursor: pointer;
+}
+.price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--rose);
+  box-shadow: 0 2px 8px rgba(201,132,143,0.4);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.price-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+/* ── Default / Trending section ── */
+.search-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.search-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.search-section-title i { font-size: 1rem; color: var(--rose); }
+.search-section-sub { font-size: 0.76rem; color: var(--light-text); }
+.search-section-link { font-size: 0.76rem; color: var(--rose); font-weight: 600; display: flex; align-items: center; gap: 5px; transition: gap 0.2s; }
+.search-section-link:hover { gap: 9px; }
+.search-default-section { margin-bottom: 36px; }
+.search-default-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* ── Popular searches tags ── */
+.popular-searches {
+  background: var(--beige);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin-bottom: 36px;
+  border: 1px solid var(--border);
+}
+.popular-searches-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--dark);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.popular-searches-title i { color: var(--rose); }
+.popular-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.pop-tag {
+  padding: 7px 18px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  color: var(--text);
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pop-tag i { color: var(--rose); font-size: 0.7rem; }
+.pop-tag:hover { background: var(--rose); color: #fff; border-color: var(--rose); }
+.pop-tag:hover i { color: rgba(255,255,255,0.85); }
+
+/* ── No results ── */
+.no-results-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+.no-results-illustration {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: var(--beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 22px;
+  font-size: 2.4rem;
+  color: var(--rose);
+  border: 2px dashed var(--rose-light);
+}
+.no-results-state h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+.no-results-state p {
+  font-size: 0.85rem;
+  color: var(--light-text);
+  line-height: 1.75;
+  max-width: 400px;
+  margin: 0 auto 28px;
+}
+.no-results-chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.chip {
+  padding: 8px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  color: var(--text);
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+.chip:hover { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+/* ── Skeleton loading ── */
+.search-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+.skel-card { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+.skel-img  { height: 240px; background: linear-gradient(90deg, #f0e8e3 25%, #faf2ef 50%, #f0e8e3 75%); background-size: 600px 100%; animation: shimmer 1.4s infinite; }
+.skel-line { height: 12px; margin: 12px 14px 6px; border-radius: 6px; background: linear-gradient(90deg, #f0e8e3 25%, #faf2ef 50%, #f0e8e3 75%); background-size: 600px 100%; animation: shimmer 1.4s infinite; }
+.skel-line.short { width: 55%; }
+.skel-line.mini  { width: 35%; margin-bottom: 14px; }
+
+/* ── Highlight ── */
+mark.hl {
+  background: rgba(201,132,143,0.2);
+  color: var(--rose-dark);
+  border-radius: 2px;
+  padding: 0 2px;
+  font-style: normal;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .search-default-grid, .search-results-grid:not(.list-view) { grid-template-columns: repeat(3, 1fr); }
+  .search-skeleton-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .search-hero { padding: 44px 20px 36px; }
+  .search-hero-title { font-size: 2rem; }
+  .search-body { padding: 28px 20px 60px; }
+  .search-default-grid, .search-results-grid:not(.list-view) { grid-template-columns: repeat(2, 1fr); }
+  .search-skeleton-grid { grid-template-columns: repeat(2, 1fr); }
+  .search-controls { flex-direction: column; align-items: flex-start; }
+  .search-controls-right { width: 100%; }
+  .price-range-wrap { display: none; }
+  .ctrl-divider { display: none; }
+  .search-results-grid.list-view .product-card { grid-template-columns: 110px 1fr; }
+  .search-results-grid.list-view .product-card-atc { display: none; }
+}
+@media (max-width: 480px) {
+  .search-default-grid, .search-results-grid:not(.list-view) { grid-template-columns: 1fr; }
+  .search-skeleton-grid { grid-template-columns: 1fr; }
+  .search-bar-btn span { display: none; }
+  .search-bar-btn { padding: 11px 16px; }
+  .search-hero-title { font-size: 1.7rem; }
+  .view-toggle { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo">Luxe<span>Her</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="index.html#about-section">About</a></li>
+    <li><a href="index.html#contact-section">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-search-wrap">
+      <form class="nav-search-form" action="search.html" method="get" role="search" aria-label="Site search">
+        <i class="fas fa-search nav-search-icon"></i>
+        <input class="nav-search-input" type="search" name="q" placeholder="Search styles…" autocomplete="off" spellcheck="false" aria-label="Search" />
+        <button type="submit" class="nav-search-submit" aria-label="Go"><i class="fas fa-arrow-right"></i></button>
+      </form>
+    </div>
+    <div class="nav-icons">
+      <a href="search.html" class="nav-icon-btn active-page" aria-label="Search"><i class="fas fa-search"></i></a>
+      <a href="#" class="nav-icon-btn" aria-label="Account"><i class="fas fa-user"></i></a>
+      <a href="wishlist.html" class="nav-icon-btn wishlist-icon" aria-label="Wishlist">
+        <i class="fas fa-heart"></i><span class="wishlist-count">0</span>
+      </a>
+      <a href="cart.html" class="nav-icon-btn cart-icon" aria-label="Cart">
+        <i class="fas fa-shopping-bag"></i><span class="cart-count">0</span>
+      </a>
+    </div>
+    <div class="hamburger" aria-label="Menu"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"><i class="fas fa-home"></i> Home</a>
+  <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+  <a href="index.html#about-section"><i class="fas fa-info-circle"></i> About</a>
+  <a href="index.html#contact-section"><i class="fas fa-envelope"></i> Contact</a>
+  <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+  <a href="cart.html"><i class="fas fa-shopping-bag"></i> Cart</a>
+</div>
+
+<!-- SEARCH HERO -->
+<section class="search-hero">
+  <span class="search-hero-eyebrow"><i class="fas fa-search"></i> Discover Your Style</span>
+  <h1 class="search-hero-title">Find Your <span>Perfect</span> Piece</h1>
+
+  <div class="search-bar-wrap">
+    <form class="search-bar-form" id="searchForm" role="search" aria-label="Search products">
+      <i class="fas fa-search search-bar-icon"></i>
+      <input class="search-bar-input" id="searchInput" type="search"
+        placeholder="Try &quot;floral dress&quot;, &quot;handbag&quot;, &quot;heels&quot;…"
+        autocomplete="off" spellcheck="false" aria-label="Search products" />
+      <button type="button" class="search-bar-clear" id="clearBtn" aria-label="Clear search">
+        <i class="fas fa-times"></i>
+      </button>
+      <button type="submit" class="search-bar-btn">
+        <i class="fas fa-search"></i><span>Search</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- Recent searches -->
+  <div class="search-recent" id="recentSearches"></div>
+
+  <!-- Category pills -->
+  <div class="search-cats" id="catPills">
+    <span class="search-cats-label">Filter:</span>
+    <button class="cat-pill active" data-cat="all"><i class="fas fa-border-all"></i>All</button>
+    <button class="cat-pill" data-cat="desi-dress"><i class="fas fa-star-and-crescent"></i>Desi Dress</button>
+    <button class="cat-pill" data-cat="floral-frock"><i class="fas fa-spa"></i>Floral Frock</button>
+    <button class="cat-pill" data-cat="tops"><i class="fas fa-tshirt"></i>Tops</button>
+    <button class="cat-pill" data-cat="jackets"><i class="fas fa-vest"></i>Jackets</button>
+    <button class="cat-pill" data-cat="long-coat"><i class="fas fa-user-tie"></i>Long Coat</button>
+    <button class="cat-pill" data-cat="bags"><i class="fas fa-shopping-bag"></i>Bags</button>
+    <button class="cat-pill" data-cat="heels"><i class="fas fa-shoe-prints"></i>Heels</button>
+    <button class="cat-pill" data-cat="sneakers"><i class="fas fa-running"></i>Sneakers</button>
+  </div>
+</section>
+
+<!-- MAIN BODY -->
+<main class="search-body" id="searchBody">
+
+  <!-- Controls bar (shown during results) -->
+  <div class="search-controls" id="searchControls" style="display:none;">
+    <p class="search-results-info" id="resultsInfo">Showing <strong id="resultsCount">0</strong> results</p>
+    <div class="search-controls-right">
+      <!-- Price filter -->
+      <div class="price-range-wrap ctrl-group">
+        <span class="ctrl-label" style="white-space:nowrap;">Max price:</span>
+        <input type="range" class="price-slider" id="priceSlider" min="30" max="200" value="200" step="5" aria-label="Maximum price" />
+        <span class="price-range-label">$<span id="priceVal">200</span></span>
+      </div>
+      <div class="ctrl-divider"></div>
+      <!-- Sort -->
+      <div class="ctrl-group">
+        <span class="ctrl-label">Sort:</span>
+        <select class="ctrl-select" id="searchSort" aria-label="Sort results">
+          <option value="default">Relevance</option>
+          <option value="low">Price: Low → High</option>
+          <option value="high">Price: High → Low</option>
+          <option value="popular">Most Popular</option>
+          <option value="newest">Newest First</option>
+        </select>
+      </div>
+      <div class="ctrl-divider"></div>
+      <!-- View toggle -->
+      <div class="view-toggle">
+        <button class="view-btn active" id="gridViewBtn" title="Grid view" aria-label="Grid view">
+          <i class="fas fa-th"></i>
+        </button>
+        <button class="view-btn" id="listViewBtn" title="List view" aria-label="List view">
+          <i class="fas fa-list"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skeleton loader -->
+  <div class="search-skeleton-grid" id="skeletonGrid" style="display:none;">
+    <div class="skel-card"><div class="skel-img"></div><div class="skel-line short"></div><div class="skel-line"></div><div class="skel-line mini"></div></div>
+    <div class="skel-card"><div class="skel-img"></div><div class="skel-line short"></div><div class="skel-line"></div><div class="skel-line mini"></div></div>
+    <div class="skel-card"><div class="skel-img"></div><div class="skel-line short"></div><div class="skel-line"></div><div class="skel-line mini"></div></div>
+    <div class="skel-card"><div class="skel-img"></div><div class="skel-line short"></div><div class="skel-line"></div><div class="skel-line mini"></div></div>
+  </div>
+
+  <!-- Results grid -->
+  <div class="search-results-grid" id="searchResultsGrid" style="display:none;" aria-live="polite" aria-label="Search results"></div>
+
+  <!-- ── Default state (no query) ── -->
+  <div id="stateInitial">
+    <!-- Popular searches -->
+    <div class="popular-searches">
+      <p class="popular-searches-title"><i class="fas fa-fire"></i> Popular Searches</p>
+      <div class="popular-tags" id="popularTags">
+        <button class="pop-tag" data-search="floral dress"><i class="fas fa-search"></i>Floral Dress</button>
+        <button class="pop-tag" data-search="satin"><i class="fas fa-search"></i>Satin</button>
+        <button class="pop-tag" data-search="handbag"><i class="fas fa-search"></i>Handbag</button>
+        <button class="pop-tag" data-search="heels"><i class="fas fa-search"></i>Heels</button>
+        <button class="pop-tag" data-search="jeans"><i class="fas fa-search"></i>Jeans</button>
+        <button class="pop-tag" data-search="trench"><i class="fas fa-search"></i>Trench Coat</button>
+        <button class="pop-tag" data-search="midi"><i class="fas fa-search"></i>Midi Dress</button>
+        <button class="pop-tag" data-search="new"><i class="fas fa-search"></i>New Arrivals</button>
+        <button class="pop-tag" data-search="sale"><i class="fas fa-search"></i>On Sale</button>
+      </div>
+    </div>
+
+    <!-- Trending -->
+    <div class="search-default-section">
+      <div class="search-section-header">
+        <h2 class="search-section-title"><i class="fas fa-fire-alt"></i> Trending Now</h2>
+        <div>
+          <span class="search-section-sub">Most loved this season</span>
+          <a href="shop.html" class="search-section-link" style="margin-left:16px;">View all <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="search-default-grid" id="trendingGrid"></div>
+    </div>
+
+    <!-- New Arrivals -->
+    <div class="search-default-section">
+      <div class="search-section-header">
+        <h2 class="search-section-title"><i class="fas fa-star"></i> New Arrivals</h2>
+        <div>
+          <span class="search-section-sub">Fresh drops this week</span>
+          <a href="shop.html?cat=new" class="search-section-link" style="margin-left:16px;">See all <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="search-default-grid" id="newArrivalsGrid"></div>
+    </div>
+
+    <!-- Sale picks -->
+    <div class="search-default-section">
+      <div class="search-section-header">
+        <h2 class="search-section-title"><i class="fas fa-tag"></i> On Sale</h2>
+        <div>
+          <span class="search-section-sub">Best deals right now</span>
+          <a href="shop.html" class="search-section-link" style="margin-left:16px;">Shop sale <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="search-default-grid" id="saleGrid"></div>
+    </div>
+  </div>
+
+  <!-- ── No results state ── -->
+  <div id="stateNoResults" style="display:none;">
+    <div class="no-results-state">
+      <div class="no-results-illustration"><i class="fas fa-search"></i></div>
+      <h3>No results found</h3>
+      <p id="noResultsMsg">We couldn't find anything matching your search. Try a different keyword or explore below.</p>
+      <div class="no-results-chips">
+        <button class="chip" data-suggest="dress">Dresses</button>
+        <button class="chip" data-suggest="bag">Handbags</button>
+        <button class="chip" data-suggest="shoes">Shoes</button>
+        <button class="chip" data-suggest="jacket">Jackets</button>
+        <button class="chip" data-suggest="top">Tops</button>
+        <button class="chip" data-suggest="jeans">Jeans</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER (no newsletter/subscribe section) -->
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a href="index.html" class="footer-logo">Luxe<span>Her</span></a>
+          <p class="footer-brand-desc">Where elegance meets everyday. Curated fashion for the modern woman who believes style is a form of self-expression.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="shop.html"><i class="fas fa-chevron-right"></i> Shop All</a></li>
+            <li><a href="index.html#about-section"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="index.html#contact-section"><i class="fas fa-chevron-right"></i> Contact</a></li>
+            <li><a href="wishlist.html"><i class="fas fa-chevron-right"></i> Wishlist</a></li>
+            <li><a href="cart.html"><i class="fas fa-chevron-right"></i> Cart</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Categories</h5>
+          <ul class="footer-links">
+            <li><a href="shop.html?cat=dresses"><i class="fas fa-chevron-right"></i> Dresses</a></li>
+            <li><a href="shop.html?cat=tops"><i class="fas fa-chevron-right"></i> Tops</a></li>
+            <li><a href="shop.html?cat=jeans"><i class="fas fa-chevron-right"></i> Jeans</a></li>
+            <li><a href="shop.html?cat=handbags"><i class="fas fa-chevron-right"></i> Handbags</a></li>
+            <li><a href="shop.html?cat=shoes"><i class="fas fa-chevron-right"></i> Shoes</a></li>
+            <li><a href="shop.html?cat=jackets"><i class="fas fa-chevron-right"></i> Jackets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Support</h5>
+          <ul class="footer-links">
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Size Guide</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Shipping Info</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Returns</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Track Your Order</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Customer Care</h5>
+          <ul class="footer-contact-list">
+            <li><span class="fc-icon"><i class="fas fa-map-marker-alt"></i></span><span>123 Fashion Street, New York</span></li>
+            <li><span class="fc-icon"><i class="fas fa-phone-alt"></i></span><span>+1 254 567 8900</span></li>
+            <li><span class="fc-icon"><i class="fas fa-envelope"></i></span><span>support@luxeher.com</span></li>
+            <li><span class="fc-icon"><i class="fas fa-clock"></i></span><span>Mon-Fri: 9am - 6pm</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">Copyright 2026 <strong>LuxeHer</strong>. All Rights Reserved.</p>
+        <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<button class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<script src="js/script.js"></script>
+<script src="js/search.js"></script>
+</body>
+</html>

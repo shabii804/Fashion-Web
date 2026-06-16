@@ -3,419 +3,87 @@
    =========================== */
 
 const LUXE_CATEGORIES = [
-  { id: 'all', label: 'All' },
-  { id: 'dresses', label: 'Dresses' },
-  { id: 'tops', label: 'Tops' },
-  { id: 'jeans', label: 'Jeans' },
-  { id: 'handbags', label: 'Handbags' },
-  { id: 'shoes', label: 'Shoes' },
-  { id: 'jackets', label: 'Jackets' }
+  { id: 'all',          label: 'All' },
+  { id: 'desi-dress',   label: 'Desi Dress' },
+  { id: 'floral-frock', label: 'Floral Frock' },
+  { id: 'tops',         label: 'Tops' },
+  { id: 'jackets',      label: 'Jackets' },
+  { id: 'long-coat',    label: 'Long Coat' },
+  { id: 'bags',         label: 'Bags' },
+  { id: 'heels',        label: 'Heels' },
+  { id: 'sneakers',     label: 'Sneakers' }
 ];
 
 const LUXE_PRODUCTS = [
-  {
-    id: '1',
-    name: 'Floral Maxi Dress',
-    category: 'dresses',
-    price: 79,
-    oldPrice: null,
-    rating: 5,
-    reviews: 72,
-    popular: 98,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=900&q=85',
-    description: 'A fluid floral maxi dress with a cinched waist, soft lining, and a graceful drape for garden dinners and summer events.'
-  },
-  {
-    id: '2',
-    name: 'Satin Slip Dress',
-    category: 'dresses',
-    price: 64,
-    oldPrice: 80,
-    rating: 4,
-    reviews: 38,
-    popular: 86,
-    badge: 'Sale',
-    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85',
-    description: 'Minimal satin with a soft sheen, slim straps, and an easy bias cut that moves beautifully.'
-  },
-  {
-    id: '3',
-    name: 'Boho Wrap Dress',
-    category: 'dresses',
-    price: 72,
-    oldPrice: null,
-    rating: 5,
-    reviews: 42,
-    popular: 91,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=900&q=85',
-    description: 'A romantic wrap silhouette with flutter sleeves and an adjustable waist tie.'
-  },
-  {
-    id: '4',
-    name: 'Silk Camisole Top',
-    category: 'tops',
-    price: 46,
-    oldPrice: null,
-    rating: 5,
-    reviews: 51,
-    popular: 79,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=900&q=85',
-    description: 'A polished layering camisole cut from satin-touch fabric with a refined neckline.'
-  },
-  {
-    id: '5',
-    name: 'Ruffle Chiffon Blouse',
-    category: 'tops',
-    price: 52,
-    oldPrice: null,
-    rating: 4,
-    reviews: 29,
-    popular: 73,
-    badge: '',
-    image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=85',
-    description: 'Lightweight chiffon, soft ruffle details, and a relaxed shape for elevated daywear.'
-  },
-  {
-    id: '6',
-    name: 'Ribbed Knit Tank',
-    category: 'tops',
-    price: 39,
-    oldPrice: null,
-    rating: 4,
-    reviews: 24,
-    popular: 64,
-    badge: '',
-    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&q=85',
-    description: 'A sculpting ribbed tank with a clean square neckline and smooth stretch.'
-  },
-  {
-    id: '7',
-    name: 'High Rise Straight Jeans',
-    category: 'jeans',
-    price: 68,
-    oldPrice: null,
-    rating: 5,
-    reviews: 63,
-    popular: 94,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=900&q=85',
-    description: 'Premium straight-leg denim with a high waist, soft hand feel, and timeless vintage wash.'
-  },
-  {
-    id: '8',
-    name: 'Wide Leg Denim Jeans',
-    category: 'jeans',
-    price: 74,
-    oldPrice: null,
-    rating: 5,
-    reviews: 47,
-    popular: 88,
-    badge: '',
-    image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=85',
-    description: 'Long, fluid wide-leg jeans designed to elongate the silhouette.'
-  },
-  {
-    id: '9',
-    name: 'Soft Blue Denim Trousers',
-    category: 'jeans',
-    price: 59,
-    oldPrice: 76,
-    rating: 4,
-    reviews: 26,
-    popular: 77,
-    badge: 'Sale',
-    image: 'https://images.unsplash.com/photo-1582418702059-97ebafb35d09?auto=format&fit=crop&w=900&q=85',
-    description: 'A relaxed denim trouser with clean tailoring and an easy weekend feel.'
-  },
-  {
-    id: '10',
-    name: 'Sculpted Top-Handle Bag',
-    category: 'handbags',
-    price: 89,
-    oldPrice: null,
-    rating: 5,
-    reviews: 34,
-    popular: 93,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85',
-    description: 'A structured top-handle bag with smooth hardware and a roomy, organized interior.'
-  },
-  {
-    id: '11',
-    name: 'Leather Tote Bag',
-    category: 'handbags',
-    price: 85,
-    oldPrice: null,
-    rating: 4,
-    reviews: 31,
-    popular: 82,
-    badge: '',
-    image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85',
-    description: 'A supple everyday tote with elegant proportions and a polished finish.'
-  },
-  {
-    id: '12',
-    name: 'Mini Crossbody Bag',
-    category: 'handbags',
-    price: 55,
-    oldPrice: null,
-    rating: 5,
-    reviews: 33,
-    popular: 81,
-    badge: '',
-    image: 'https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?auto=format&fit=crop&w=900&q=85',
-    description: 'Compact, modern, and hands-free with enough room for daily essentials.'
-  },
-  {
-    id: '13',
-    name: 'Strappy Leather Heels',
-    category: 'shoes',
-    price: 74,
-    oldPrice: null,
-    rating: 5,
-    reviews: 44,
-    popular: 89,
-    badge: '',
-    image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=85',
-    description: 'Elegant strappy heels with a balanced heel height and soft cushioned insole.'
-  },
-  {
-    id: '14',
-    name: 'Pointed Slingback Pumps',
-    category: 'shoes',
-    price: 82,
-    oldPrice: null,
-    rating: 4,
-    reviews: 27,
-    popular: 70,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1512374382149-233c42b6a83b?auto=format&fit=crop&w=900&q=85',
-    description: 'A refined pointed slingback for office days, dinners, and elevated everyday styling.'
-  },
-  {
-    id: '15',
-    name: 'Polished Ankle Boots',
-    category: 'shoes',
-    price: 78,
-    oldPrice: 95,
-    rating: 5,
-    reviews: 36,
-    popular: 78,
-    badge: 'Sale',
-    image: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=900&q=85',
-    description: 'A sleek ankle boot with a softly squared toe and wearable block heel.'
-  },
-  {
-    id: '16',
-    name: 'Cropped Boucle Jacket',
-    category: 'jackets',
-    price: 118,
-    oldPrice: null,
-    rating: 5,
-    reviews: 21,
-    popular: 84,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=85',
-    description: 'A feminine cropped jacket with textured boucle fabric and refined trim.'
-  },
-  {
-    id: '17',
-    name: 'Modern Denim Jacket',
-    category: 'jackets',
-    price: 92,
-    oldPrice: null,
-    rating: 4,
-    reviews: 32,
-    popular: 76,
-    badge: '',
-    image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=85',
-    description: 'A clean-cut denim jacket with a softly structured fit and premium wash.'
-  },
-  {
-    id: '18',
-    name: 'Tailored Longline Blazer',
-    category: 'jackets',
-    price: 129,
-    oldPrice: 156,
-    rating: 5,
-    reviews: 39,
-    popular: 90,
-    badge: 'Sale',
-    image: 'https://images.unsplash.com/photo-1520975954732-35dd22299614?auto=format&fit=crop&w=900&q=85',
-    description: 'A longline blazer with sharp tailoring, feminine shaping, and day-to-night polish.'
-  },
-  {
-    id: '19',
-    name: 'Rose Garden Midi Dress',
-    category: 'dresses',
-    price: 88,
-    oldPrice: null,
-    rating: 5,
-    reviews: 58,
-    popular: 92,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=85',
-    description: 'A softly structured midi dress with a romantic print and polished waist detail.'
-  },
-  {
-    id: '20',
-    name: 'Pleated Evening Dress',
-    category: 'dresses',
-    price: 112,
-    oldPrice: 140,
-    rating: 5,
-    reviews: 37,
-    popular: 87,
-    badge: 'Sale',
-    image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&q=85',
-    description: 'Elegant pleats, a fluid skirt, and an occasion-ready silhouette.'
-  },
-  {
-    id: '21',
-    name: 'Satin Bow Blouse',
-    category: 'tops',
-    price: 58,
-    oldPrice: null,
-    rating: 4,
-    reviews: 41,
-    popular: 75,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=85',
-    description: 'A luminous satin blouse finished with a soft bow neckline.'
-  },
-  {
-    id: '22',
-    name: 'Soft Tailored Shirt',
-    category: 'tops',
-    price: 49,
-    oldPrice: null,
-    rating: 4,
-    reviews: 28,
-    popular: 66,
-    badge: '',
-    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=85',
-    description: 'A crisp shirt with a relaxed feminine fit and effortless polish.'
-  },
-  {
-    id: '23',
-    name: 'Ivory Straight Jeans',
-    category: 'jeans',
-    price: 79,
-    oldPrice: null,
-    rating: 5,
-    reviews: 46,
-    popular: 83,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=900&q=85',
-    description: 'Clean ivory denim with a straight-leg cut and premium structured feel.'
-  },
-  {
-    id: '24',
-    name: 'Vintage Slim Jeans',
-    category: 'jeans',
-    price: 69,
-    oldPrice: 88,
-    rating: 4,
-    reviews: 52,
-    popular: 80,
-    badge: 'Sale',
-    image: 'https://images.unsplash.com/photo-1475178626620-a4d074967452?auto=format&fit=crop&w=900&q=85',
-    description: 'Slim denim with a vintage blue wash and flattering high-rise fit.'
-  },
-  {
-    id: '25',
-    name: 'Quilted Shoulder Bag',
-    category: 'handbags',
-    price: 96,
-    oldPrice: null,
-    rating: 5,
-    reviews: 44,
-    popular: 89,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=900&q=85',
-    description: 'A quilted shoulder bag with chain detail and a compact luxe finish.'
-  },
-  {
-    id: '26',
-    name: 'Pebbled Bucket Bag',
-    category: 'handbags',
-    price: 78,
-    oldPrice: null,
-    rating: 4,
-    reviews: 23,
-    popular: 69,
-    badge: '',
-    image: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85',
-    description: 'A soft pebbled bucket bag with a practical drawstring shape.'
-  },
-  {
-    id: '27',
-    name: 'Minimal Court Heels',
-    category: 'shoes',
-    price: 86,
-    oldPrice: null,
-    rating: 5,
-    reviews: 35,
-    popular: 74,
-    badge: '',
-    image: 'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=900&q=85',
-    description: 'A refined court heel with clean lines and a softly cushioned insole.'
-  },
-  {
-    id: '28',
-    name: 'Cream Loafer Mules',
-    category: 'shoes',
-    price: 72,
-    oldPrice: null,
-    rating: 4,
-    reviews: 39,
-    popular: 71,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=900&q=85',
-    description: 'Cream loafer mules designed for polished, comfortable everyday wear.'
-  },
-  {
-    id: '29',
-    name: 'Luxe Faux Leather Jacket',
-    category: 'jackets',
-    price: 132,
-    oldPrice: null,
-    rating: 5,
-    reviews: 48,
-    popular: 91,
-    badge: 'New',
-    image: 'https://images.unsplash.com/photo-1520975682031-a83f00926154?auto=format&fit=crop&w=900&q=85',
-    description: 'A buttery faux leather jacket with clean hardware and modern shaping.'
-  },
-  {
-    id: '30',
-    name: 'Soft Trench Coat',
-    category: 'jackets',
-    price: 148,
-    oldPrice: 178,
-    rating: 5,
-    reviews: 57,
-    popular: 95,
-    badge: 'Sale',
-    image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85',
-    description: 'A fluid trench coat with a tie waist, clean lapel, and seasonless finish.'
-  }
+
+  /* ── DESI DRESS ── */
+  { id:'1',  name:'Embroidered Desi Dress',    category:'desi-dress',   price:2800, oldPrice:null, rating:5, reviews:48, popular:97, badge:'New',  image:'Assets/Desi Dress/1.jpeg', description:'A stunning hand-embroidered desi dress featuring intricate thread work and vibrant colours, perfect for festive occasions and formal gatherings.' },
+  { id:'2',  name:'Classic Lawn Suit',         category:'desi-dress',   price:1800, oldPrice:2200, rating:5, reviews:62, popular:94, badge:'Sale', image:'Assets/Desi Dress/2.jpeg', description:'Soft premium lawn fabric in a timeless silhouette with delicate printed motifs — effortlessly elegant for everyday and special events.' },
+  { id:'3',  name:'Printed Khaddar Dress',     category:'desi-dress',   price:2200, oldPrice:null, rating:4, reviews:35, popular:88, badge:'New',  image:'Assets/Desi Dress/3.jpeg', description:'Warm khaddar fabric with an artful block-print pattern and a relaxed straight cut — ideal for cool evenings and casual occasions.' },
+  { id:'4',  name:'Chiffon Formal Dress',      category:'desi-dress',   price:3500, oldPrice:null, rating:5, reviews:41, popular:92, badge:'New',  image:'Assets/Desi Dress/4.jpeg', description:'Flowing chiffon in a rich jewel tone with a gracefully draped dupatta — crafted for weddings, dinners, and upscale events.' },
+  { id:'5',  name:'Organza Party Dress',       category:'desi-dress',   price:4200, oldPrice:5000, rating:5, reviews:29, popular:90, badge:'Sale', image:'Assets/Desi Dress/5.jpeg', description:'Shimmering organza with hand-stitched gota detailing and a flared skirt — a showstopper for parties and mehndi ceremonies.' },
+  { id:'6',  name:'Linen Casual Kurta',        category:'desi-dress',   price:1400, oldPrice:null, rating:4, reviews:54, popular:82, badge:'',     image:'Assets/Desi Dress/6.jpeg', description:'Breathable linen in a relaxed straight-cut kurta style — cool, comfortable, and effortlessly stylish for day-to-day wear.' },
+  { id:'7',  name:'Velvet Festive Dress',      category:'desi-dress',   price:5200, oldPrice:null, rating:5, reviews:38, popular:95, badge:'New',  image:'Assets/Desi Dress/7.jpeg', description:'Luxurious velvet with deep embossed patterns and an A-line silhouette — the perfect statement piece for Eid and festive celebrations.' },
+
+  /* ── FLORAL FROCK ── */
+  { id:'8',  name:'Garden Bloom Frock',        category:'floral-frock', price:1900, oldPrice:null, rating:5, reviews:67, popular:96, badge:'New',  image:'Assets/folral froxk/2.jpeg', description:'A whimsical floral frock with a fitted bodice and flared skirt, adorned with soft pastel blooms on a lightweight cotton base.' },
+  { id:'9',  name:'Rose Petal Midi Frock',     category:'floral-frock', price:2100, oldPrice:2500, rating:4, reviews:44, popular:87, badge:'Sale', image:'Assets/folral froxk/3.jpeg', description:'A romantic midi-length frock featuring a delicate rose-petal print, cinched waist, and soft flutter sleeves — ideal for brunches and garden parties.' },
+  { id:'10', name:'Wildflower Shift Frock',    category:'floral-frock', price:1700, oldPrice:null, rating:5, reviews:51, popular:91, badge:'New',  image:'Assets/folral froxk/4.jpeg', description:'A breezy wildflower-print shift frock in a relaxed silhouette — effortless summer dressing from morning coffee to evening strolls.' },
+  { id:'11', name:'Buttercup Ruffle Frock',    category:'floral-frock', price:2400, oldPrice:null, rating:4, reviews:33, popular:83, badge:'',     image:'Assets/folral froxk/5.jpeg', description:'Cascading ruffle tiers in a sunny buttercup floral print — playful, feminine, and perfect for casual days out.' },
+  { id:'12', name:'Daisy Chain Wrap Frock',    category:'floral-frock', price:2000, oldPrice:null, rating:5, reviews:58, popular:89, badge:'New',  image:'Assets/folral froxk/6.jpeg', description:'A wrap-style frock in a sweet daisy-chain print with adjustable tie waist — flattering on every figure, versatile for all-day wear.' },
+  { id:'13', name:'Blossom Maxi Frock',        category:'floral-frock', price:2800, oldPrice:3200, rating:5, reviews:72, popular:93, badge:'Sale', image:'Assets/folral froxk/WhatsApp Image 2026-06-15 at 12.34.57 PM.jpeg', description:'A floor-length blossom-print maxi frock in flowy chiffon — made for summer evenings, outdoor weddings, and every romantic occasion.' },
+
+  /* ── TOPS ── */
+  { id:'14', name:'Ruffle Chiffon Top',        category:'tops',         price:950,  oldPrice:null, rating:5, reviews:43, popular:88, badge:'New',  image:'Assets/Tops/1.jpeg', description:'A lightweight chiffon top with soft ruffle detailing at the neckline — pairs beautifully with trousers, skirts, or denim for an elevated everyday look.' },
+  { id:'15', name:'Embroidered Linen Top',     category:'tops',         price:1200, oldPrice:null, rating:4, reviews:37, popular:84, badge:'New',  image:'Assets/Tops/2.jpeg', description:'Breathable linen with intricate embroidery along the hemline — relaxed, refined, and perfect for both casual and semi-formal occasions.' },
+  { id:'16', name:'Satin Tie-Neck Blouse',     category:'tops',         price:1100, oldPrice:1400, rating:5, reviews:61, popular:91, badge:'Sale', image:'Assets/Tops/3.jpeg', description:'A polished satin blouse with a self-tie neck bow — luxurious drape and a sleek silhouette that transitions seamlessly from desk to dinner.' },
+  { id:'17', name:'Printed Lawn Shirt',        category:'tops',         price:850,  oldPrice:null, rating:4, reviews:55, popular:79, badge:'',     image:'Assets/Tops/4.jpeg', description:'A fresh printed lawn shirt in a relaxed fit — soft on skin, vibrant in colour, and perfect for warm-weather days and casual outings.' },
+
+  /* ── JACKETS ── */
+  { id:'18', name:'Structured Puffer Jacket',  category:'jackets',      price:4500, oldPrice:null, rating:5, reviews:39, popular:92, badge:'New',  image:'Assets/Jackets/1.jpeg', description:'A sleek structured puffer jacket with a slim profile, quilted detailing, and a zip-up front — warm, chic, and built for the modern woman.' },
+  { id:'19', name:'Cropped Denim Jacket',      category:'jackets',      price:3200, oldPrice:3800, rating:4, reviews:52, popular:86, badge:'Sale', image:'Assets/Jackets/2.jpeg', description:'A cropped denim jacket with a vintage-wash finish and classic button front — the ultimate layering piece for casual and smart-casual looks.' },
+  { id:'20', name:'Boucle Tweed Jacket',       category:'jackets',      price:5800, oldPrice:null, rating:5, reviews:28, popular:90, badge:'New',  image:'Assets/Jackets/3.jpeg', description:'A refined boucle tweed jacket with contrast trim and gold-tone buttons — timeless elegance for formal meetings, events, and polished everyday dressing.' },
+
+  /* ── LONG COAT ── */
+  { id:'21', name:'Camel Wool Long Coat',      category:'long-coat',    price:8500, oldPrice:null, rating:5, reviews:34, popular:95, badge:'New',  image:'Assets/Long coat/1.jpeg', description:"A luxurious camel-tone wool-blend long coat with clean lapels and a belted waist — the season's most sophisticated outerwear investment." },
+  { id:'22', name:'Oversized Check Coat',      category:'long-coat',    price:7200, oldPrice:9000, rating:4, reviews:47, popular:89, badge:'Sale', image:'Assets/Long coat/2.jpeg', description:'An oversized double-check long coat in rich earth tones — bold yet refined, with a relaxed drape and deep pockets for effortless style.' },
+  { id:'23', name:'Belted Trench Coat',        category:'long-coat',    price:7800, oldPrice:null, rating:5, reviews:61, popular:93, badge:'New',  image:'Assets/Long coat/3.jpeg', description:'A classic belted trench coat in a neutral tone with storm flaps and structured shoulders — seasonless, polished, and endlessly wearable.' },
+
+  /* ── BAGS ── */
+  { id:'24', name:'Structured Tote Bag',       category:'bags',         price:3800, oldPrice:null, rating:5, reviews:58, popular:94, badge:'New',  image:'Assets/Bag/1.jpeg', description:'A spacious structured tote in smooth vegan leather — roomy enough for daily essentials, polished enough for every occasion.' },
+  { id:'25', name:'Chain-Strap Shoulder Bag',  category:'bags',         price:4200, oldPrice:5000, rating:5, reviews:72, popular:97, badge:'Sale', image:'Assets/Bag/2.jpeg', description:'A sleek shoulder bag with a gold chain strap and quilted exterior — compact, luxurious, and perfect for evenings out.' },
+  { id:'26', name:'Woven Rattan Clutch',       category:'bags',         price:2200, oldPrice:null, rating:4, reviews:41, popular:82, badge:'New',  image:'Assets/Bag/3.jpeg', description:'A handcrafted woven rattan clutch with a satin lining — bohemian charm meets structured elegance for summer events.' },
+  { id:'27', name:'Mini Crossbody Bag',        category:'bags',         price:2900, oldPrice:null, rating:5, reviews:65, popular:90, badge:'',     image:'Assets/Bag/4.jpeg', description:'A compact mini crossbody in smooth leather with an adjustable strap — hands-free, stylish, and just the right size for your daily must-haves.' },
+  { id:'28', name:'Oversized Bucket Bag',      category:'bags',         price:3400, oldPrice:null, rating:4, reviews:36, popular:85, badge:'',     image:'Assets/Bag/5.jpeg', description:'A relaxed oversized bucket bag in pebbled vegan leather — effortlessly cool with drawstring closure and generous interior compartments.' },
+
+  /* ── HEELS ── */
+  { id:'29', name:'Strappy Block Heels',       category:'heels',        price:3200, oldPrice:null, rating:5, reviews:54, popular:93, badge:'New',  image:'Assets/Heels/1.jpeg', description:'Elegant strappy block heels in nude leather with an ankle buckle — comfortable enough for all-day wear, stunning enough for any occasion.' },
+  { id:'30', name:'Pointed Stiletto Heels',    category:'heels',        price:3800, oldPrice:4500, rating:5, reviews:68, popular:96, badge:'Sale', image:'Assets/Heels/2.jpeg', description:'Sleek pointed-toe stilettos in smooth patent leather — the ultimate power heel for formal events, dinners, and nights when you mean business.' },
+  { id:'31', name:'Platform Pump Heels',       category:'heels',        price:4100, oldPrice:null, rating:4, reviews:39, popular:87, badge:'New',  image:'Assets/Heels/3.jpeg', description:'Bold platform pumps with a chunky heel and rounded toe — extra height, extra confidence, and a retro-modern edge that turns heads.' },
+  { id:'32', name:'Embellished Kitten Heels',  category:'heels',        price:2800, oldPrice:null, rating:5, reviews:47, popular:88, badge:'',     image:'Assets/Heels/4.jpeg', description:'Delicate kitten heels with rhinestone embellishment and a pointed toe — understated glamour pairing perfectly with western and eastern ensembles.' },
+  { id:'33', name:'Ankle-Strap Cone Heels',    category:'heels',        price:3500, oldPrice:null, rating:4, reviews:31, popular:84, badge:'',     image:'Assets/Heels/5.jpeg', description:'Cone-heeled sandals with a secure ankle strap and open toe — sculptural silhouette, effortless style, from office to evening events.' },
+  { id:'34', name:'Mule Slide Heels',          category:'heels',        price:2600, oldPrice:3000, rating:5, reviews:76, popular:91, badge:'Sale', image:'Assets/Heels/6.jpeg', description:'Slip-on mule heels in a square-toe silhouette with a mid-height block heel — minimal, modern, and endlessly versatile.' },
+  { id:'35', name:'Slingback Court Heels',     category:'heels',        price:3300, oldPrice:null, rating:5, reviews:59, popular:89, badge:'New',  image:'Assets/Heels/7.jpeg', description:'Classic slingback court heels with a tapered heel and pointed toe — timeless sophistication for boardrooms, events, and every polished occasion.' },
+
+  /* ── SNEAKERS ── */
+  { id:'36', name:'Chunky Platform Sneakers',  category:'sneakers',     price:4500, oldPrice:null, rating:5, reviews:83, popular:97, badge:'New',  image:'Assets/Sneekers/1.jpeg', description:'Trendy chunky platform sneakers with a thick sole, padded collar, and clean white upper — the streetwear staple that goes with everything.' },
+  { id:'37', name:'Classic White Sneakers',    category:'sneakers',     price:3200, oldPrice:3800, rating:5, reviews:94, popular:98, badge:'Sale', image:'Assets/Sneekers/2.jpeg', description:'Clean white leather sneakers in a minimalist low-top design — the wardrobe essential that elevates every casual outfit from denim to dresses.' },
+  { id:'38', name:'Colourblock Runner Sneakers',category:'sneakers',    price:3900, oldPrice:null, rating:4, reviews:57, popular:86, badge:'New',  image:'Assets/Sneekers/3.jpeg', description:'Bold colourblock runner sneakers with lightweight mesh upper and cushioned sole — sporty meets street-style for gym runs and casual days.' }
 ];
 
 window.LUXE_CATEGORIES = LUXE_CATEGORIES;
-window.LUXE_PRODUCTS = LUXE_PRODUCTS;
+window.LUXE_PRODUCTS   = LUXE_PRODUCTS;
+
 
 function escapeHTML(value) {
   return String(value ?? '').replace(/[&<>"']/g, (char) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
   }[char]));
+}
+
+/* ── PKR currency formatter ── */
+function fmt(amount) {
+  return 'PKR\u00a0' + Math.round(Number(amount)).toLocaleString('en-PK');
 }
 
 function categoryLabel(category) {
@@ -423,90 +91,60 @@ function categoryLabel(category) {
 }
 
 function productPlaceholder(product) {
-  const title = escapeHTML(product?.name || 'LuxeHer');
+  const title    = escapeHTML(product?.name || 'LuxeHer');
   const category = escapeHTML(categoryLabel(product?.category));
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
-      <defs>
-        <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0" stop-color="#FAF6F2"/>
-          <stop offset="0.55" stop-color="#F0DDD6"/>
-          <stop offset="1" stop-color="#EDD5D9"/>
-        </linearGradient>
-      </defs>
-      <rect width="900" height="1200" fill="url(#bg)"/>
-      <circle cx="450" cy="420" r="190" fill="#fff" opacity="0.42"/>
-      <path d="M330 480c34-110 206-110 240 0l55 330H275l55-330z" fill="#fff" opacity="0.72"/>
-      <text x="450" y="930" text-anchor="middle" font-family="Georgia, serif" font-size="58" fill="#2d2d2d">${title}</text>
-      <text x="450" y="1005" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" letter-spacing="8" fill="#C9848F">${category.toUpperCase()}</text>
-    </svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+    <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#FAF6F2"/><stop offset="0.55" stop-color="#F0DDD6"/><stop offset="1" stop-color="#EDD5D9"/>
+    </linearGradient></defs>
+    <rect width="900" height="1200" fill="url(#bg)"/>
+    <circle cx="450" cy="420" r="190" fill="#fff" opacity="0.42"/>
+    <path d="M330 480c34-110 206-110 240 0l55 330H275l55-330z" fill="#fff" opacity="0.72"/>
+    <text x="450" y="930" text-anchor="middle" font-family="Georgia,serif" font-size="58" fill="#2d2d2d">${title}</text>
+    <text x="450" y="1005" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" letter-spacing="8" fill="#C9848F">${category.toUpperCase()}</text>
+  </svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
 function getProductById(id) {
-  return LUXE_PRODUCTS.find((product) => product.id === String(id));
+  return LUXE_PRODUCTS.find((p) => p.id === String(id));
 }
 
 function resolveProduct(input) {
-  const base = typeof input === 'object' ? input : { id: input };
+  const base    = typeof input === 'object' ? input : { id: input };
   const product = getProductById(base.id);
-  const merged = { ...(product || {}), ...base };
-  merged.id = String(merged.id || '');
-  merged.name = merged.name || product?.name || 'LuxeHer Piece';
+  const merged  = { ...(product || {}), ...base };
+  merged.id       = String(merged.id || '');
+  merged.name     = merged.name     || product?.name     || 'LuxeHer Piece';
   merged.category = merged.category || product?.category || 'fashion';
-  merged.price = parseFloat(merged.price ?? product?.price ?? 0);
-  merged.img = merged.img || merged.image || product?.image || productPlaceholder(merged);
-  merged.image = merged.image || merged.img;
+  merged.price    = parseFloat(merged.price ?? product?.price ?? 0);
+  merged.img      = merged.img   || merged.image  || product?.image || productPlaceholder(merged);
+  merged.image    = merged.image || merged.img;
   return merged;
 }
 
 function getCart() {
-  try {
-    return JSON.parse(localStorage.getItem('lh_cart') || '[]').map((item) => ({
-      ...resolveProduct(item),
-      qty: Math.max(1, parseInt(item.qty || 1, 10))
-    }));
-  } catch {
-    return [];
-  }
+  try { return JSON.parse(localStorage.getItem('lh_cart') || '[]').map((item) => ({ ...resolveProduct(item), qty: Math.max(1, parseInt(item.qty || 1, 10)) })); }
+  catch { return []; }
 }
-
 function resetCartOnRefresh() {
   if (typeof performance === 'undefined') return;
-  const navEntry = performance.getEntriesByType?.('navigation')?.[0];
-  const isReload = navEntry?.type === 'reload' || performance.navigation?.type === 1;
+  const nav = performance.getEntriesByType?.('navigation')?.[0];
+  const isReload = nav?.type === 'reload' || performance.navigation?.type === 1;
   if (isReload) localStorage.removeItem('lh_cart');
 }
-
-function saveCart(cart) {
-  localStorage.setItem('lh_cart', JSON.stringify(cart));
-}
+function saveCart(cart) { localStorage.setItem('lh_cart', JSON.stringify(cart)); }
 
 function getWishlist() {
-  try {
-    return JSON.parse(localStorage.getItem('lh_wishlist') || '[]').map((item) => resolveProduct(item));
-  } catch {
-    return [];
-  }
+  try { return JSON.parse(localStorage.getItem('lh_wishlist') || '[]').map((item) => resolveProduct(item)); }
+  catch { return []; }
 }
-
-function saveWishlist(wishlist) {
-  localStorage.setItem('lh_wishlist', JSON.stringify(wishlist));
-}
+function saveWishlist(wishlist) { localStorage.setItem('lh_wishlist', JSON.stringify(wishlist)); }
 
 function showToast(message, type) {
   let toast = document.getElementById('toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'toast';
-    toast.className = 'toast';
-    document.body.appendChild(toast);
-  }
-
-  toast.innerHTML = `
-    <span class="toast-icon"><i class="fas ${type === 'danger' ? 'fa-trash-alt' : type === 'success' ? 'fa-check' : 'fa-heart'}"></i></span>
-    <span>${escapeHTML(message)}</span>
-  `;
+  if (!toast) { toast = document.createElement('div'); toast.id = 'toast'; toast.className = 'toast'; document.body.appendChild(toast); }
+  toast.innerHTML = `<span class="toast-icon"><i class="fas ${type === 'danger' ? 'fa-trash-alt' : type === 'success' ? 'fa-check' : 'fa-heart'}"></i></span><span>${escapeHTML(message)}</span>`;
   toast.className = `toast${type ? ` ${type}` : ''}`;
   requestAnimationFrame(() => toast.classList.add('show'));
   clearTimeout(toast._hideTimer);
@@ -514,107 +152,51 @@ function showToast(message, type) {
 }
 
 function updateBadges() {
-  const cartTotal = getCart().reduce((sum, item) => sum + item.qty, 0);
+  const cartTotal     = getCart().reduce((s, i) => s + i.qty, 0);
   const wishlistTotal = getWishlist().length;
-
-  document.querySelectorAll('.cart-count').forEach((badge) => {
-    const changed = badge.textContent !== String(cartTotal);
-    badge.textContent = cartTotal;
-    if (changed && cartTotal > 0) {
-      badge.classList.add('bump');
-      setTimeout(() => badge.classList.remove('bump'), 320);
-    }
-  });
-
-  document.querySelectorAll('.wishlist-count').forEach((badge) => {
-    const changed = badge.textContent !== String(wishlistTotal);
-    badge.textContent = wishlistTotal;
-    if (changed && wishlistTotal > 0) {
-      badge.classList.add('bump');
-      setTimeout(() => badge.classList.remove('bump'), 320);
-    }
-  });
+  document.querySelectorAll('.cart-count').forEach((b) => { const changed = b.textContent !== String(cartTotal); b.textContent = cartTotal; if (changed && cartTotal > 0) { b.classList.add('bump'); setTimeout(() => b.classList.remove('bump'), 320); } });
+  document.querySelectorAll('.wishlist-count').forEach((b) => { const changed = b.textContent !== String(wishlistTotal); b.textContent = wishlistTotal; if (changed && wishlistTotal > 0) { b.classList.add('bump'); setTimeout(() => b.classList.remove('bump'), 320); } });
 }
 
 function addToCart(id, name, price, img, qty, category) {
   const product = resolveProduct({ id, name, price, img, category });
-  const cart = getCart();
+  const cart    = getCart();
   const existing = cart.find((item) => item.id === product.id);
-
-  if (existing) {
-    existing.qty += qty || 1;
-  } else {
-    cart.push({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      img: product.img,
-      category: product.category,
-      qty: qty || 1
-    });
-  }
-
-  saveCart(cart);
-  updateBadges();
-  showToast(`${product.name} added to cart`, 'success');
+  if (existing) { existing.qty += qty || 1; } else { cart.push({ id: product.id, name: product.name, price: product.price, img: product.img, category: product.category, qty: qty || 1 }); }
+  saveCart(cart); updateBadges(); showToast(`${product.name} added to cart`, 'success');
 }
 
 function addToWishlist(id, name, price, img, category) {
   const product = resolveProduct({ id, name, price, img, category });
   const wishlist = getWishlist();
-  const existingIndex = wishlist.findIndex((item) => item.id === product.id);
-
-  if (existingIndex >= 0) {
-    wishlist.splice(existingIndex, 1);
-    saveWishlist(wishlist);
-    updateBadges();
-    markWishlisted();
-    showToast(`${product.name} removed from wishlist`, 'danger');
-    return false;
-  }
-
-  wishlist.push({
-    id: product.id,
-    name: product.name,
-    price: product.price,
-    img: product.img,
-    category: product.category
-  });
-  saveWishlist(wishlist);
-  updateBadges();
-  markWishlisted();
-  showToast(`${product.name} saved to wishlist`, 'success');
-  return true;
+  const idx = wishlist.findIndex((item) => item.id === product.id);
+  if (idx >= 0) { wishlist.splice(idx, 1); saveWishlist(wishlist); updateBadges(); markWishlisted(); showToast(`${product.name} removed from wishlist`, 'danger'); return false; }
+  wishlist.push({ id: product.id, name: product.name, price: product.price, img: product.img, category: product.category });
+  saveWishlist(wishlist); updateBadges(); markWishlisted(); showToast(`${product.name} saved to wishlist`, 'success'); return true;
 }
 
 function markWishlisted() {
   const ids = new Set(getWishlist().map((item) => item.id));
-  document.querySelectorAll('.wishlist-btn[data-id], .btn-wishlist[data-id]').forEach((button) => {
-    const isSaved = ids.has(String(button.dataset.id));
-    button.classList.toggle('wishlisted', isSaved);
-    button.setAttribute('aria-pressed', String(isSaved));
-
-    if (button.classList.contains('btn-wishlist')) {
-      button.innerHTML = isSaved
-        ? '<i class="fas fa-heart"></i> SAVED TO WISHLIST'
-        : '<i class="far fa-heart"></i> ADD TO WISHLIST';
+  document.querySelectorAll('.wishlist-btn[data-id], .btn-wishlist[data-id]').forEach((btn) => {
+    const saved = ids.has(String(btn.dataset.id));
+    btn.classList.toggle('wishlisted', saved);
+    btn.setAttribute('aria-pressed', String(saved));
+    if (btn.classList.contains('btn-wishlist')) {
+      btn.innerHTML = saved ? '<i class="fas fa-heart"></i> SAVED TO WISHLIST' : '<i class="far fa-heart"></i> ADD TO WISHLIST';
     }
   });
 }
 
 function starsFor(rating) {
-  const rounded = Math.round(rating || 0);
-  return '★★★★★'.slice(0, rounded) + '☆☆☆☆☆'.slice(0, 5 - rounded);
+  const r = Math.round(rating || 0);
+  return '★★★★★'.slice(0, r) + '☆☆☆☆☆'.slice(0, 5 - r);
 }
 
 function productCardHTML(product, options = {}) {
-  const item = resolveProduct(product);
+  const item       = resolveProduct(product);
   const badgeClass = item.badge?.toLowerCase() === 'sale' ? 'sale' : 'new';
-  const cardClass = options.fade === false ? 'product-card' : 'product-card fade-in';
-  const oldPrice = item.oldPrice
-    ? `<span class="old-price">$${Number(item.oldPrice).toFixed(2)}</span>`
-    : '';
-
+  const cardClass  = options.fade === false ? 'product-card' : 'product-card fade-in';
+  const oldPrice   = item.oldPrice ? `<span class="old-price">${fmt(item.oldPrice)}</span>` : '';
   return `
     <article class="${cardClass}" data-product-id="${escapeHTML(item.id)}" data-cat="${escapeHTML(item.category)}" data-price="${item.price}" data-popular="${item.popular || 0}">
       <div class="product-img-wrap">
@@ -623,12 +205,8 @@ function productCardHTML(product, options = {}) {
           <img src="${escapeHTML(item.img)}" data-fallback="${productPlaceholder(item)}" alt="${escapeHTML(item.name)}" loading="lazy" decoding="async" />
         </a>
         <div class="product-actions">
-          <button class="action-btn wishlist-btn" data-id="${escapeHTML(item.id)}" aria-label="Save ${escapeHTML(item.name)} to wishlist" title="Wishlist">
-            <i class="far fa-heart"></i>
-          </button>
-          <button class="action-btn quickview-btn" data-id="${escapeHTML(item.id)}" aria-label="Quick view ${escapeHTML(item.name)}" title="Quick View">
-            <i class="far fa-eye"></i>
-          </button>
+          <button class="action-btn wishlist-btn" data-id="${escapeHTML(item.id)}" aria-label="Save ${escapeHTML(item.name)} to wishlist" title="Wishlist"><i class="far fa-heart"></i></button>
+          <button class="action-btn quickview-btn" data-id="${escapeHTML(item.id)}" aria-label="Quick view ${escapeHTML(item.name)}" title="Quick View"><i class="far fa-eye"></i></button>
         </div>
       </div>
       <div class="product-info">
@@ -638,74 +216,57 @@ function productCardHTML(product, options = {}) {
           <span class="stars" aria-hidden="true">${starsFor(item.rating || 5)}</span>
           <span class="rating-count">(${item.reviews || 0})</span>
         </div>
-        <div class="product-price">$${item.price.toFixed(2)} ${oldPrice}</div>
+        <div class="product-price">${fmt(item.price)} ${oldPrice}</div>
       </div>
       <button class="product-card-atc" data-id="${escapeHTML(item.id)}" aria-label="Add ${escapeHTML(item.name)} to cart">
-        <i class="fas fa-shopping-bag"></i>
-        <span>Add to Cart</span>
+        <i class="fas fa-shopping-bag"></i><span>Add to Cart</span>
       </button>
-    </article>
-  `;
+    </article>`;
 }
 
 function skeletonCards(count = 8) {
-  return Array.from({ length: count }, () => `
-    <div class="product-skeleton" aria-hidden="true">
-      <div class="skeleton-img"></div>
-      <div class="skeleton-line short"></div>
-      <div class="skeleton-line"></div>
-      <div class="skeleton-line mini"></div>
-    </div>
-  `).join('');
+  return Array.from({ length: count }, () => `<div class="product-skeleton" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line mini"></div></div>`).join('');
 }
 
 function hydrateImages(scope = document) {
   scope.querySelectorAll('img').forEach((img) => {
     if (!img.closest('.hero') && !img.hasAttribute('loading')) img.loading = 'lazy';
     if (!img.hasAttribute('decoding')) img.decoding = 'async';
-    img.addEventListener('error', () => {
-      const fallback = img.dataset.fallback || productPlaceholder({ name: img.alt || 'LuxeHer', category: 'fashion' });
-      if (img.src !== fallback) img.src = fallback;
-    }, { once: true });
+    img.addEventListener('error', () => { const fb = img.dataset.fallback || productPlaceholder({ name: img.alt || 'LuxeHer', category: 'fashion' }); if (img.src !== fb) img.src = fb; }, { once: true });
   });
 }
 
 function observeFadeIns(scope = document) {
   const faders = scope.querySelectorAll('.fade-in:not(.visible)');
-  if (!('IntersectionObserver' in window)) {
-    faders.forEach((el) => el.classList.add('visible'));
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-
+  if (!('IntersectionObserver' in window)) { faders.forEach((el) => el.classList.add('visible')); return; }
+  const observer = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.08 });
   faders.forEach((el) => observer.observe(el));
 }
+
 
 function renderHomeProducts() {
   const grid = document.querySelector('.new-collection .products-grid');
   const tabs = document.querySelector('.new-collection .collection-tabs');
   if (!grid) return;
-
   let active = 'all';
-  const featured = LUXE_PRODUCTS.slice(0, 12);
 
+  /* Build tabs from LUXE_CATEGORIES */
   if (tabs) {
-    tabs.innerHTML = LUXE_CATEGORIES.map((category) => `
-      <button class="tab-btn${category.id === 'all' ? ' active' : ''}" data-tab="${category.id}">${category.label}</button>
-    `).join('');
+    tabs.innerHTML = LUXE_CATEGORIES.map((c) =>
+      `<button class="tab-btn${c.id === 'all' ? ' active' : ''}" data-tab="${c.id}">${c.label}</button>`
+    ).join('');
   }
 
   function draw() {
-    const products = featured.filter((item) => active === 'all' || item.category === active);
-    grid.innerHTML = products.slice(0, active === 'all' ? 12 : 8).map((item) => productCardHTML(item)).join('');
+    const pool = active === 'all'
+      ? LUXE_PRODUCTS.slice(0, 16)
+      : LUXE_PRODUCTS.filter((p) => p.category === active).slice(0, 12);
+
+    if (pool.length === 0) {
+      grid.innerHTML = '<p style="color:var(--light-text);text-align:center;padding:40px;grid-column:1/-1;">No products in this category.</p>';
+      return;
+    }
+    grid.innerHTML = pool.map((item) => productCardHTML(item)).join('');
     hydrateImages(grid);
     markWishlisted();
     observeFadeIns(grid);
@@ -714,90 +275,90 @@ function renderHomeProducts() {
   grid.innerHTML = skeletonCards(8);
   setTimeout(draw, 180);
 
-  tabs?.addEventListener('click', (event) => {
-    const button = event.target.closest('.tab-btn');
-    if (!button) return;
-    active = button.dataset.tab || 'all';
-    tabs.querySelectorAll('.tab-btn').forEach((tab) => tab.classList.toggle('active', tab === button));
-    draw();
+  tabs?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    active = btn.dataset.tab || 'all';
+    tabs.querySelectorAll('.tab-btn').forEach((t) => t.classList.toggle('active', t === btn));
+    grid.innerHTML = skeletonCards(4);
+    setTimeout(draw, 120);
   });
 }
 
 function renderShopProducts() {
   const grid = document.getElementById('shopGrid');
   if (!grid) return;
-
-  const tabsWrap = document.querySelector('.shop-filter-tabs');
+  const tabsWrap   = document.querySelector('.shop-filter-tabs');
   const sortSelect = document.getElementById('sortFilter');
-  const countEl = document.getElementById('resultsCount');
-  const noResults = document.getElementById('shopNoResults');
-  const urlCategory = new URLSearchParams(window.location.search).get('cat');
-  let activeCategory = LUXE_CATEGORIES.some((category) => category.id === urlCategory) ? urlCategory : 'all';
+  const countEl    = document.getElementById('resultsCount');
+  const noResults  = document.getElementById('shopNoResults');
+  const urlCat     = new URLSearchParams(window.location.search).get('cat');
+  let activeCat    = LUXE_CATEGORIES.some((c) => c.id === urlCat) ? urlCat : 'all';
 
   grid.innerHTML = skeletonCards(8);
   if (countEl) countEl.textContent = '...';
 
   setTimeout(() => {
+    /* Build tabs */
     if (tabsWrap) {
-      tabsWrap.innerHTML = LUXE_CATEGORIES.map((category) => `
-        <button class="shop-tab${category.id === activeCategory ? ' active' : ''}" data-filter="${category.id}">${category.label}</button>
-      `).join('');
+      tabsWrap.innerHTML = LUXE_CATEGORIES.map((c) =>
+        `<button class="shop-tab${c.id === activeCat ? ' active' : ''}" data-filter="${c.id}">${c.label}</button>`
+      ).join('');
     }
 
+    /* Build inline category dropdown if missing */
     const filters = document.querySelector('.shop-filters');
     if (filters && !document.getElementById('categoryFilter')) {
-      filters.insertAdjacentHTML('afterbegin', `
-        <div class="filter-group">
-          <span class="filter-label">Category:</span>
-          <select class="filter-select" id="categoryFilter" aria-label="Filter by category">
-            ${LUXE_CATEGORIES.map((category) => `<option value="${category.id}">${category.label}</option>`).join('')}
-          </select>
-        </div>
-        <div class="filter-divider"></div>
-      `);
+      filters.insertAdjacentHTML('afterbegin',
+        `<div class="filter-group"><span class="filter-label">Category:</span>
+         <select class="filter-select" id="categoryFilter" aria-label="Filter by category">
+           ${LUXE_CATEGORIES.map((c) => `<option value="${c.id}">${c.label}</option>`).join('')}
+         </select></div><div class="filter-divider"></div>`
+      );
     }
-
-    const categorySelect = document.getElementById('categoryFilter');
-    if (categorySelect) categorySelect.value = activeCategory;
+    const catSelect = document.getElementById('categoryFilter');
+    if (catSelect) catSelect.value = activeCat;
 
     function applyFilter() {
       const sort = sortSelect?.value || 'default';
-      let products = LUXE_PRODUCTS.filter((item) => activeCategory === 'all' || item.category === activeCategory);
+      let products = activeCat === 'all'
+        ? LUXE_PRODUCTS.slice()
+        : LUXE_PRODUCTS.filter((p) => p.category === activeCat);
 
-      if (sort === 'low') products = products.sort((a, b) => a.price - b.price);
-      if (sort === 'high') products = products.sort((a, b) => b.price - a.price);
-      if (sort === 'popular') products = products.sort((a, b) => (b.popular || 0) - (a.popular || 0));
+      if (sort === 'low')     products.sort((a, b) => a.price - b.price);
+      if (sort === 'high')    products.sort((a, b) => b.price - a.price);
+      if (sort === 'popular') products.sort((a, b) => (b.popular || 0) - (a.popular || 0));
 
-      grid.innerHTML = products.map((item) => productCardHTML(item)).join('');
+      grid.innerHTML = products.length
+        ? products.map((p) => productCardHTML(p)).join('')
+        : '<p style="color:var(--light-text);text-align:center;padding:40px;grid-column:1/-1;">No products found.</p>';
+
       if (countEl) countEl.textContent = products.length;
       noResults?.classList.toggle('hidden', products.length > 0);
-      tabsWrap?.querySelectorAll('.shop-tab').forEach((tab) => {
-        tab.classList.toggle('active', tab.dataset.filter === activeCategory);
-      });
-      if (categorySelect && categorySelect.value !== activeCategory) categorySelect.value = activeCategory;
+
+      tabsWrap?.querySelectorAll('.shop-tab').forEach((t) =>
+        t.classList.toggle('active', t.dataset.filter === activeCat)
+      );
+      if (catSelect && catSelect.value !== activeCat) catSelect.value = activeCat;
+
       hydrateImages(grid);
       markWishlisted();
       observeFadeIns(grid);
     }
 
-    tabsWrap?.addEventListener('click', (event) => {
-      const button = event.target.closest('.shop-tab');
-      if (!button) return;
-      activeCategory = button.dataset.filter || 'all';
+    tabsWrap?.addEventListener('click', (e) => {
+      const btn = e.target.closest('.shop-tab');
+      if (!btn) return;
+      activeCat = btn.dataset.filter || 'all';
       applyFilter();
     });
-
-    categorySelect?.addEventListener('change', () => {
-      activeCategory = categorySelect.value;
-      applyFilter();
-    });
-
+    catSelect?.addEventListener('change', () => { activeCat = catSelect.value; applyFilter(); });
     sortSelect?.addEventListener('change', applyFilter);
 
     document.querySelectorAll('.shop-cat-link').forEach((link) => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        activeCategory = link.dataset.filter || 'all';
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        activeCat = link.dataset.filter || 'all';
         applyFilter();
         document.querySelector('.shop-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
@@ -807,10 +368,9 @@ function renderShopProducts() {
   }, 220);
 }
 
-function ensureQuickViewModal() {
-  let modal = document.getElementById('quickViewModal');
-  if (modal) return modal;
 
+function ensureQuickViewModal() {
+  let modal = document.getElementById('quickViewModal'); if (modal) return modal;
   document.body.insertAdjacentHTML('beforeend', `
     <div class="modal-backdrop quick-view-modal" id="quickViewModal" hidden>
       <div class="quick-view-panel" role="dialog" aria-modal="true" aria-labelledby="quickViewTitle">
@@ -827,31 +387,23 @@ function ensureQuickViewModal() {
           </div>
         </div>
       </div>
-    </div>
-  `);
-
+    </div>`);
   modal = document.getElementById('quickViewModal');
-  modal.addEventListener('click', (event) => {
-    if (event.target === modal || event.target.closest('[data-close-modal]')) closeModal(modal);
-  });
+  modal.addEventListener('click', (e) => { if (e.target === modal || e.target.closest('[data-close-modal]')) closeModal(modal); });
   return modal;
 }
 
 function openQuickView(id) {
   const product = resolveProduct(id);
-  const modal = ensureQuickViewModal();
-  const img = modal.querySelector('.quick-view-img img');
-
-  img.src = product.img;
-  img.alt = product.name;
-  img.dataset.fallback = productPlaceholder(product);
-  modal.querySelector('.product-category').textContent = categoryLabel(product.category);
-  modal.querySelector('#quickViewTitle').textContent = product.name;
-  modal.querySelector('.quick-view-price').textContent = `$${product.price.toFixed(2)}`;
-  modal.querySelector('p').textContent = product.description || 'A curated LuxeHer essential for polished everyday styling.';
-  modal.querySelector('.quick-view-add').dataset.id = product.id;
+  const modal   = ensureQuickViewModal();
+  const img     = modal.querySelector('.quick-view-img img');
+  img.src = product.img; img.alt = product.name; img.dataset.fallback = productPlaceholder(product);
+  modal.querySelector('.product-category').textContent  = categoryLabel(product.category);
+  modal.querySelector('#quickViewTitle').textContent    = product.name;
+  modal.querySelector('.quick-view-price').textContent  = fmt(product.price);
+  modal.querySelector('p').textContent                  = product.description || 'A curated LuxeHer essential for polished everyday styling.';
+  modal.querySelector('.quick-view-add').dataset.id     = product.id;
   modal.querySelector('.quick-view-wishlist').dataset.id = product.id;
-
   modal.hidden = false;
   requestAnimationFrame(() => modal.classList.add('show'));
   hydrateImages(modal);
@@ -863,13 +415,11 @@ function closeModal(modal) {
 }
 
 function ensureConfirmModal() {
-  let modal = document.getElementById('confirmModal');
-  if (modal) return modal;
-
+  let modal = document.getElementById('confirmModal'); if (modal) return modal;
   document.body.insertAdjacentHTML('beforeend', `
     <div class="modal-backdrop confirm-modal" id="confirmModal" hidden>
       <div class="confirm-panel" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
-        <button class="modal-close" type="button" data-confirm-cancel aria-label="Close confirmation"><i class="fas fa-times"></i></button>
+        <button class="modal-close" type="button" data-confirm-cancel aria-label="Close"><i class="fas fa-times"></i></button>
         <div class="confirm-icon"><i class="fas fa-shopping-bag"></i></div>
         <h2 id="confirmTitle">Are you sure?</h2>
         <p id="confirmMessage">This action cannot be undone.</p>
@@ -878,259 +428,111 @@ function ensureConfirmModal() {
           <button class="btn-primary" type="button" data-confirm-ok>Confirm</button>
         </div>
       </div>
-    </div>
-  `);
-
-  return document.getElementById('confirmModal');
+    </div>`);
+  modal = document.getElementById('confirmModal');
+  modal.addEventListener('click', (e) => { if (e.target === modal || e.target.closest('[data-confirm-cancel]')) { closeModal(modal); modal._resolve?.(false); } });
+  return modal;
 }
 
-function openConfirmModal(options = {}) {
-  const modal = ensureConfirmModal();
-  modal.querySelector('#confirmTitle').textContent = options.title || 'Are you sure?';
-  modal.querySelector('#confirmMessage').textContent = options.message || 'This action cannot be undone.';
-  modal.hidden = false;
-  requestAnimationFrame(() => modal.classList.add('show'));
-
-  const ok = modal.querySelector('[data-confirm-ok]');
-  const cancelButtons = modal.querySelectorAll('[data-confirm-cancel]');
-  const close = () => closeModal(modal);
-  const confirm = () => {
-    options.onConfirm?.();
-    close();
-  };
-
-  ok.onclick = confirm;
-  cancelButtons.forEach((button) => { button.onclick = close; });
-  modal.onclick = (event) => {
-    if (event.target === modal) close();
-  };
-}
-
-window.openConfirmModal = openConfirmModal;
-
-function bindProductActions() {
-  document.addEventListener('click', (event) => {
-    const wishlistButton = event.target.closest('.wishlist-btn[data-id], .btn-wishlist[data-id], .quick-view-wishlist[data-id]');
-    if (wishlistButton) {
-      event.preventDefault();
-      const product = resolveProduct(wishlistButton.dataset.id);
-      addToWishlist(product.id, product.name, product.price, product.img, product.category);
-      return;
-    }
-
-    const cartButton = event.target.closest('.quickadd-btn[data-id], .product-card-atc[data-id], .quick-view-add[data-id]');
-    if (cartButton) {
-      event.preventDefault();
-      const product = resolveProduct(cartButton.dataset.id);
-      addToCart(product.id, product.name, product.price, product.img, 1, product.category);
-      cartButton.classList.add('is-added');
-      const label = cartButton.querySelector('span');
-      const original = label?.textContent;
-      if (label) label.textContent = 'Added';
-      setTimeout(() => {
-        cartButton.classList.remove('is-added');
-        if (label && original) label.textContent = original;
-      }, 1200);
-      return;
-    }
-
-    const quickViewButton = event.target.closest('.quickview-btn[data-id]');
-    if (quickViewButton) {
-      event.preventDefault();
-      openQuickView(quickViewButton.dataset.id);
-    }
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') return;
-    document.querySelectorAll('.modal-backdrop.show').forEach(closeModal);
+function showConfirm(title, message) {
+  return new Promise((resolve) => {
+    const modal = ensureConfirmModal();
+    document.getElementById('confirmTitle').textContent   = title;
+    document.getElementById('confirmMessage').textContent = message;
+    modal._resolve = resolve;
+    modal.hidden = false;
+    requestAnimationFrame(() => modal.classList.add('show'));
+    const okBtn = modal.querySelector('[data-confirm-ok]');
+    const handler = () => { closeModal(modal); resolve(true); okBtn.removeEventListener('click', handler); };
+    okBtn.addEventListener('click', handler);
   });
 }
 
-function bindPageChrome() {
-  updateBadges();
-  markWishlisted();
-  hydrateImages();
+/* ── Global delegated event handler ── */
+document.addEventListener('click', (e) => {
+  /* Quick-view add to cart */
+  const qvAdd = e.target.closest('.quick-view-add');
+  if (qvAdd) { const p = resolveProduct(qvAdd.dataset.id); addToCart(p.id, p.name, p.price, p.img, 1, p.category); return; }
+  /* Quick-view wishlist */
+  const qvWl = e.target.closest('.quick-view-wishlist');
+  if (qvWl) { const p = resolveProduct(qvWl.dataset.id); addToWishlist(p.id, p.name, p.price, p.img, p.category); return; }
+  /* Card ATC */
+  const atcBtn = e.target.closest('.product-card-atc');
+  if (atcBtn) { const p = resolveProduct(atcBtn.dataset.id); addToCart(p.id, p.name, p.price, p.img, 1, p.category); return; }
+  /* Quick-add */
+  const qaBtn = e.target.closest('.quickadd-btn');
+  if (qaBtn) { const p = resolveProduct({ id: qaBtn.dataset.id, name: qaBtn.dataset.name, price: qaBtn.dataset.price, img: qaBtn.dataset.img }); addToCart(p.id, p.name, p.price, p.img, 1, p.category); return; }
+  /* Wishlist */
+  const wlBtn = e.target.closest('.wishlist-btn');
+  if (wlBtn) { const p = resolveProduct({ id: wlBtn.dataset.id, name: wlBtn.dataset.name, price: wlBtn.dataset.price, img: wlBtn.dataset.img }); addToWishlist(p.id, p.name, p.price, p.img, p.category); return; }
+  /* Quick-view open */
+  const qvBtn = e.target.closest('.quickview-btn');
+  if (qvBtn) { openQuickView(qvBtn.dataset.id); return; }
+});
 
-  const navbar = document.querySelector('.navbar');
-  const backToTop = document.querySelector('.back-to-top');
-  const scrollBar = document.createElement('div');
-  scrollBar.className = 'scroll-progress';
-  document.body.appendChild(scrollBar);
-  const updateChrome = () => {
-    navbar?.classList.toggle('scrolled', window.scrollY > 10);
-    backToTop?.classList.toggle('visible', window.scrollY > 400);
-    const max = (document.documentElement?.scrollHeight || 0) - (window.innerHeight || 0);
-    const progress = max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0;
-    scrollBar.style.width = `${progress}%`;
-  };
-  updateChrome();
-  window.addEventListener('scroll', updateChrome, { passive: true });
-  backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+/* ── Navbar scroll + back-to-top ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 40);
+  document.querySelector('.back-to-top')?.classList.toggle('visible', window.scrollY > 300);
+}, { passive: true });
+document.querySelector('.back-to-top')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  hamburger?.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu?.classList.toggle('open');
+/* ── Hamburger ── */
+(function () {
+  const hamburger  = document.querySelector('.hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (!hamburger || !mobileMenu) return;
+  hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+  document.addEventListener('click', (e) => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); } });
+})();
+
+/* ── Smooth nav links ── */
+document.querySelectorAll('.smooth-link').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
+});
 
-  document.querySelectorAll('a.smooth-link, a[href^="#"]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      const href = link.getAttribute('href');
-      if (!href || href === '#' || !href.startsWith('#')) return;
-      const target = document.querySelector(href);
-      if (!target) return;
-      event.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - 70;
-      window.scrollTo({ top, behavior: 'smooth' });
-      mobileMenu?.classList.remove('open');
-      hamburger?.classList.remove('open');
-    });
+/* ── Home collection tabs (index.html) ── */
+(function () {
+  const tabs = document.querySelector('.new-collection .collection-tabs');
+  if (!tabs) return;
+  tabs.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tab-btn'); if (!btn) return;
+    tabs.querySelectorAll('.tab-btn').forEach((t) => t.classList.remove('active'));
+    btn.classList.add('active');
   });
+})();
 
-  observeFadeIns();
-}
-
-function bindProductPage() {
-  document.querySelectorAll('.size-btn').forEach((button) => {
-    button.addEventListener('click', () => {
-      button.closest('.size-options')?.querySelectorAll('.size-btn').forEach((item) => item.classList.remove('active'));
-      button.classList.add('active');
-      const sizeEl = document.getElementById('sizeName');
-      if (sizeEl) sizeEl.textContent = button.textContent.trim();
-    });
-  });
-
-  document.querySelectorAll('.color-swatch').forEach((swatch) => {
-    swatch.addEventListener('click', () => {
-      swatch.closest('.color-options')?.querySelectorAll('.color-swatch').forEach((item) => item.classList.remove('active'));
-      swatch.classList.add('active');
-      const colorEl = document.getElementById('colorName');
-      if (colorEl) colorEl.textContent = swatch.dataset.name || '';
-    });
-  });
-
-  const qtyVal = document.querySelector('.qty-val');
-  document.querySelector('.qty-minus')?.addEventListener('click', () => {
-    if (qtyVal && +qtyVal.textContent > 1) qtyVal.textContent = +qtyVal.textContent - 1;
-  });
-  document.querySelector('.qty-plus')?.addEventListener('click', () => {
-    if (qtyVal) qtyVal.textContent = +qtyVal.textContent + 1;
-  });
-
-  document.querySelector('.btn-addtocart[data-id]')?.addEventListener('click', (event) => {
-    const button = event.currentTarget;
-    const product = resolveProduct(button.dataset.id);
-    const qty = parseInt(document.querySelector('.qty-val')?.textContent || '1', 10);
-    addToCart(product.id, product.name, product.price, product.img, qty, product.category);
-  });
-
-  document.querySelector('.btn-buynow')?.addEventListener('click', (event) => {
-    const addButton = document.querySelector('.btn-addtocart[data-id]');
-    if (!addButton) return;
-    event.preventDefault();
-    const product = resolveProduct(addButton.dataset.id);
-    const qty = parseInt(document.querySelector('.qty-val')?.textContent || '1', 10);
-    addToCart(product.id, product.name, product.price, product.img, qty, product.category);
-    window.location.href = 'cart.html';
-  });
-
-  const mainImg = document.getElementById('mainProductImg');
-  document.querySelectorAll('.thumb-img').forEach((thumb) => {
-    thumb.addEventListener('click', () => {
-      document.querySelectorAll('.thumb-img').forEach((item) => item.classList.remove('active'));
-      thumb.classList.add('active');
-      const next = thumb.querySelector('img')?.src?.replace('w=200', 'w=900');
-      if (!mainImg || !next) return;
-      mainImg.style.opacity = '0';
-      setTimeout(() => {
-        mainImg.src = next;
-        mainImg.style.opacity = '1';
-      }, 180);
-    });
-  });
-  if (mainImg) mainImg.style.transition = 'opacity 0.25s ease';
-
-  document.querySelectorAll('.accordion-header').forEach((header) => {
-    header.addEventListener('click', () => header.closest('.accordion-item')?.classList.toggle('open'));
-  });
-}
-
-function bindForms() {
-  document.querySelectorAll('.contact-form').forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const button = form.querySelector('button[type="submit"]');
-      if (!button) return;
-      const original = button.innerHTML;
-      button.innerHTML = '<i class="fas fa-check"></i> Message Sent';
-      button.classList.add('is-success');
-      showToast("Message sent. We'll reply soon.", 'success');
-      setTimeout(() => {
-        button.innerHTML = original;
-        button.classList.remove('is-success');
-        form.reset();
-      }, 2600);
-    });
-  });
-
-  document.getElementById('newsletterForm')?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const button = event.target.querySelector('button');
-    const original = button?.innerHTML || 'SUBSCRIBE';
-    if (button) {
-      button.innerHTML = '<i class="fas fa-check"></i> SUBSCRIBED';
-      button.classList.add('is-success');
-    }
-    showToast('Thanks for subscribing.', 'success');
-    setTimeout(() => {
-      if (button) {
-        button.innerHTML = original;
-        button.classList.remove('is-success');
-      }
-      event.target.reset();
-    }, 2600);
-  });
-}
-
-function normalizeFooter() {
-  document.querySelectorAll('.footer-payments').forEach((section) => section.remove());
-
-  const categoryLinks = LUXE_CATEGORIES
-    .filter((category) => category.id !== 'all')
-    .map((category) => `
-      <li>
-        <a href="shop.html?cat=${encodeURIComponent(category.id)}" class="shop-cat-link" data-filter="${category.id}">
-          <i class="fas fa-chevron-right"></i> ${category.label}
-        </a>
-      </li>
-    `).join('');
-
-  document.querySelectorAll('.footer-col').forEach((column) => {
-    const title = column.querySelector('.footer-col-title');
-    if (!title || title.textContent.trim().toLowerCase() !== 'categories') return;
-    const list = column.querySelector('.footer-links');
-    if (list) list.innerHTML = categoryLinks;
-  });
-
-  document.querySelectorAll('.footer-copy').forEach((copy) => {
-    copy.innerHTML = 'Copyright 2026 <strong>LuxeHer</strong>. All Rights Reserved.';
-  });
-}
-
-function initLuxeHer() {
-  if (window.__luxeHerInit) return;
-  window.__luxeHerInit = true;
-
+/* ── Init on DOMContentLoaded ── */
+document.addEventListener('DOMContentLoaded', () => {
   resetCartOnRefresh();
-  normalizeFooter();
-  bindPageChrome();
-  bindProductActions();
-  bindProductPage();
-  bindForms();
+  updateBadges();
   renderHomeProducts();
   renderShopProducts();
-}
+  observeFadeIns();
+  hydrateImages();
+  markWishlisted();
 
-initLuxeHer();
+  /* Accordion on product page */
+  document.querySelectorAll('.accordion-header').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.accordion-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item.open').forEach((i) => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* Color & size selectors on product page */
+  document.querySelectorAll('.color-swatch').forEach((sw) => sw.addEventListener('click', () => { document.querySelectorAll('.color-swatch').forEach((s) => s.classList.remove('active')); sw.classList.add('active'); }));
+  document.querySelectorAll('.size-btn').forEach((btn) => btn.addEventListener('click', () => { document.querySelectorAll('.size-btn').forEach((b) => b.classList.remove('active')); btn.classList.add('active'); }));
+
+  /* Qty control */
+  document.querySelector('.qty-btn.qty-minus')?.addEventListener('click', () => { const v = document.querySelector('.qty-val'); if (v && parseInt(v.textContent) > 1) v.textContent = parseInt(v.textContent) - 1; });
+  document.querySelector('.qty-btn.qty-plus')?.addEventListener('click', () => { const v = document.querySelector('.qty-val'); if (v) v.textContent = parseInt(v.textContent) + 1; });
+
+  /* Contact form */
+  document.querySelector('.contact-form')?.addEventListener('submit', (e) => { e.preventDefault(); showToast('Message sent! We\'ll be in touch soon.', 'success'); e.target.reset(); });
+});

@@ -18,19 +18,28 @@
     <li><a href="index.html#about-section">About</a></li>
     <li><a href="index.html#contact-section">Contact</a></li>
   </ul>
-  <div class="nav-icons">
-    <a href="#"><i class="fas fa-search"></i></a>
-    <a href="#"><i class="fas fa-user"></i></a>
-    <a href="wishlist.html" class="wishlist-icon active-page" style="position:relative">
-      <i class="fas fa-heart"></i>
-      <span class="wishlist-count">0</span>
-    </a>
-    <a href="cart.html" class="cart-icon" style="position:relative">
-      <i class="fas fa-shopping-bag"></i>
-      <span class="cart-count">0</span>
-    </a>
+  <div class="nav-right">
+    <div class="nav-search-wrap">
+      <form class="nav-search-form" action="search.html" method="get" role="search" aria-label="Site search">
+        <i class="fas fa-search nav-search-icon"></i>
+        <input class="nav-search-input" type="search" name="q" placeholder="Search styles…" autocomplete="off" spellcheck="false" aria-label="Search" />
+        <button type="submit" class="nav-search-submit" aria-label="Go"><i class="fas fa-arrow-right"></i></button>
+      </form>
+    </div>
+    <div class="nav-icons">
+      <a href="search.html" class="nav-icon-btn" aria-label="Search"><i class="fas fa-search"></i></a>
+      <a href="#" class="nav-icon-btn" aria-label="Account"><i class="fas fa-user"></i></a>
+      <a href="wishlist.html" class="nav-icon-btn wishlist-icon active-page" aria-label="Wishlist" style="position:relative">
+        <i class="fas fa-heart"></i>
+        <span class="wishlist-count">0</span>
+      </a>
+      <a href="cart.html" class="nav-icon-btn cart-icon" aria-label="Cart" style="position:relative">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
   </div>
-  <div class="hamburger"><span></span><span></span><span></span></div>
 </nav>
 <div class="mobile-menu">
   <a href="index.html">Home</a>
