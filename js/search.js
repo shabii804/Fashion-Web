@@ -32,7 +32,7 @@
   let query       = '';
   let category    = 'all';
   let sort        = 'default';
-  let maxPrice    = 200;
+  let maxPrice    = 10000; // PKR — no filter by default (above all product prices)
   let isListView  = false;
   let debouncer   = null;
   const MAX_RECENT = 6;
@@ -75,7 +75,8 @@
   ──────────────────────────────────────── */
   function updateSliderTrack() {
     if (!priceSlider) return;
-    const pct = ((maxPrice - 30) / (200 - 30)) * 100;
+    const min = 500, max = 10000;
+    const pct = ((maxPrice - min) / (max - min)) * 100;
     priceSlider.style.background =
       'linear-gradient(to right, var(--rose) 0%, var(--rose) ' + pct + '%, var(--border) ' + pct + '%, var(--border) 100%)';
   }
@@ -83,6 +84,97 @@
   /* ────────────────────────────────────────
      SEARCH ENGINE
   ──────────────────────────────────────── */
+
+  /* Keyword → category map: covers common user queries */
+  var KEYWORD_MAP = {
+    'bag':        'bags',
+    'bags':       'bags',
+    'handbag':    'bags',
+    'handbags':   'bags',
+    'purse':      'bags',
+    'tote':       'bags',
+    'clutch':     'bags',
+    'crossbody':  'bags',
+    'shoulder':   'bags',
+    'bucket':     'bags',
+    'rattan':     'bags',
+
+    'heel':       'heels',
+    'heels':      'heels',
+    'stiletto':   'heels',
+    'pump':       'heels',
+    'mule':       'heels',
+    'kitten':     'heels',
+    'slingback':  'heels',
+    'cone heel':  'heels',
+
+    'sneaker':    'sneakers',
+    'sneakers':   'sneakers',
+    'trainer':    'sneakers',
+    'runner':     'sneakers',
+    'platform shoe': 'sneakers',
+
+    'jacket':     'jackets',
+    'jackets':    'jackets',
+    'denim jacket': 'jackets',
+    'tweed':      'jackets',
+    'puffer':     'jackets',
+
+    'coat':       'long-coat',
+    'long coat':  'long-coat',
+    'trench':     'long-coat',
+    'overcoat':   'long-coat',
+    'check coat': 'long-coat',
+
+    'top':        'tops',
+    'tops':       'tops',
+    'blouse':     'tops',
+    'shirt':      'tops',
+    'chiffon top': 'tops',
+    'linen top':  'tops',
+
+    'desi':       'desi-dress',
+    'desi dress': 'desi-dress',
+    'lawn':       'desi-dress',
+    'kurta':      'desi-dress',
+    'khaddar':    'desi-dress',
+    'chiffon':    'desi-dress',
+    'organza':    'desi-dress',
+    'velvet':     'desi-dress',
+    'eid':        'desi-dress',
+    'formal dress': 'desi-dress',
+    'party dress': 'desi-dress',
+
+    'frock':      'floral-frock',
+    'frocks':     'floral-frock',
+    'floral':     'floral-frock',
+    'floral frock': 'floral-frock',
+    'maxi frock': 'floral-frock',
+    'midi frock': 'floral-frock',
+    'bloom':      'floral-frock',
+    'ruffle':     'floral-frock',
+    'wrap frock': 'floral-frock',
+
+    'sale':       '__badge_sale__',
+    'new':        '__badge_new__',
+    'new arrival': '__badge_new__',
+    'on sale':    '__badge_sale__',
+    'discount':   '__badge_sale__'
+  };
+
+  function resolveKeyword(q) {
+    /* Direct full match */
+    if (KEYWORD_MAP[q]) return KEYWORD_MAP[q];
+    /* Partial — find longest key that query contains or is contained by */
+    var best = null;
+    Object.keys(KEYWORD_MAP).forEach(function (key) {
+      if (q.includes(key) || key.includes(q)) {
+        if (!best || key.length > best.length) best = key;
+      }
+    });
+    return best ? KEYWORD_MAP[best] : null;
+  }
+
   function runSearch(immediate) {
     clearTimeout(debouncer);
     var delay = immediate ? 0 : 260;
@@ -100,21 +192,51 @@
       return;
     }
 
-    /* Show skeleton briefly */
     showState('loading');
 
     setTimeout(function () {
+      /* ── Resolve keyword to category or badge ── */
+      var mappedCat   = q ? resolveKeyword(q) : null;
+      var badgeFilter = null;
+      if (mappedCat === '__badge_sale__') { badgeFilter = 'Sale'; mappedCat = null; }
+      if (mappedCat === '__badge_new__')  { badgeFilter = 'New';  mappedCat = null; }
+
       var results = products.filter(function (p) {
-        var matchCat   = category === 'all' || p.category === category;
-        var matchPrice = p.price <= maxPrice;
-        if (!matchCat || !matchPrice) return false;
+        /* Category filter from pill */
+        if (category !== 'all' && p.category !== category) return false;
+
+        /* Price filter */
+        if (maxPrice < 10000 && p.price > maxPrice) return false;
+
+        /* No text query — just category/price filter */
         if (!q) return true;
+
+        /* Badge filter (sale / new) */
+        if (badgeFilter) return (p.badge || '').toLowerCase() === badgeFilter.toLowerCase();
+
+        /* Keyword mapped to a category */
+        if (mappedCat && category === 'all') {
+          if (p.category === mappedCat) return true;
+        }
+
+        /* Full-text search across name, category label, description, badge */
+        var catLabel = categoryLabel(p.category).toLowerCase();
         return (
           p.name.toLowerCase().includes(q) ||
           p.category.toLowerCase().includes(q) ||
+          catLabel.includes(q) ||
           (p.description || '').toLowerCase().includes(q) ||
           (p.badge || '').toLowerCase().includes(q)
         );
+      });
+
+      /* Score: exact name match first, then category match, then rest */
+      results.sort(function (a, b) {
+        var aName = a.name.toLowerCase();
+        var bName = b.name.toLowerCase();
+        var aScore = aName.startsWith(q) ? 3 : aName.includes(q) ? 2 : 1;
+        var bScore = bName.startsWith(q) ? 3 : bName.includes(q) ? 2 : 1;
+        return bScore - aScore;
       });
 
       results = sortArr(results, sort);
@@ -122,29 +244,24 @@
       if (results.length === 0) {
         showState('noResults');
         if (noResultsMsg) {
-          noResultsMsg.textContent = q
-            ? 'No results for "' + query + '". Try another keyword or a different category.'
-            : 'No products in this price range / category.';
+          noResultsMsg.textContent = 'No results for "' + query + '". Try another keyword or browse a category below.';
         }
       } else {
         showState('results');
         resultsGrid.innerHTML = results.map(function (p) {
-          return productCardHTML(p, { highlight: q });
+          return productCardHTML(p);
         }).join('');
-        /* Highlight query in product names */
         if (q) highlightText(resultsGrid, q);
         resultsCount.textContent = results.length;
-        resultsInfo.innerHTML = q
-          ? 'Showing <strong>' + results.length + '</strong> result' +
-            (results.length !== 1 ? 's' : '') +
-            ' for "<strong>' + escapeHTML(query) + '</strong>"'
-          : 'Showing <strong>' + results.length + '</strong> product' +
-            (results.length !== 1 ? 's' : '');
+        resultsInfo.innerHTML =
+          'Showing <strong>' + results.length + '</strong> result' +
+          (results.length !== 1 ? 's' : '') +
+          ' for "<strong>' + escapeHTML(query) + '</strong>"';
         hydrateImages(resultsGrid);
         markWishlisted();
         observeFadeIns(resultsGrid);
       }
-    }, 200);
+    }, 180);
   }
 
   /* ── Highlight query term inside rendered product names ── */
@@ -308,7 +425,7 @@
     if (priceSlider) {
       priceSlider.addEventListener('input', function () {
         maxPrice = parseInt(this.value, 10);
-        if (priceVal) priceVal.textContent = maxPrice === 200 ? '200+' : maxPrice;
+        if (priceVal) priceVal.textContent = maxPrice >= 10000 ? 'Any' : 'PKR ' + maxPrice.toLocaleString();
         updateSliderTrack();
         if (query || category !== 'all') runSearch(false);
       });
