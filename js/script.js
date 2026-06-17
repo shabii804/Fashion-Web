@@ -154,8 +154,23 @@ function showToast(message, type) {
 function updateBadges() {
   const cartTotal     = getCart().reduce((s, i) => s + i.qty, 0);
   const wishlistTotal = getWishlist().length;
+
+  /* Pending orders count */
+  let pendingTotal = 0;
+  try {
+    const orders = JSON.parse(localStorage.getItem('lh_orders') || '[]');
+    pendingTotal = orders.filter((o) => o.status === 'pending' || o.status === 'confirmed' || o.status === 'shipped').length;
+  } catch {}
+
   document.querySelectorAll('.cart-count').forEach((b) => { const changed = b.textContent !== String(cartTotal); b.textContent = cartTotal; if (changed && cartTotal > 0) { b.classList.add('bump'); setTimeout(() => b.classList.remove('bump'), 320); } });
   document.querySelectorAll('.wishlist-count').forEach((b) => { const changed = b.textContent !== String(wishlistTotal); b.textContent = wishlistTotal; if (changed && wishlistTotal > 0) { b.classList.add('bump'); setTimeout(() => b.classList.remove('bump'), 320); } });
+  document.querySelectorAll('.orders-count-badge').forEach((b) => {
+    b.textContent = pendingTotal;
+    b.style.display = pendingTotal > 0 ? 'flex' : 'none';
+    const changed = b.dataset.prev !== String(pendingTotal);
+    b.dataset.prev = String(pendingTotal);
+    if (changed && pendingTotal > 0) { b.classList.add('bump'); setTimeout(() => b.classList.remove('bump'), 320); }
+  });
 }
 
 function addToCart(id, name, price, img, qty, category) {

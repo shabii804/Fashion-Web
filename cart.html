@@ -10,7 +10,7 @@
 <body>
 
 <!-- ── NAVBAR ── -->
-<nav class="navbar">
+<nav class="navbar" id="navbar">
   <a href="index.html" class="nav-logo">Luxe<span>Her</span></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -28,26 +28,29 @@
     </div>
     <div class="nav-icons">
       <a href="search.html" class="nav-icon-btn" aria-label="Search"><i class="fas fa-search"></i></a>
-      <a href="#" class="nav-icon-btn" aria-label="Account"><i class="fas fa-user"></i></a>
-      <a href="wishlist.html" class="nav-icon-btn wishlist-icon" aria-label="Wishlist" style="position:relative">
-        <i class="fas fa-heart"></i>
-        <span class="wishlist-count">0</span>
+      <a href="track-order.html" class="nav-icon-btn" aria-label="Track Order" title="Track Order"><i class="fas fa-box"></i><span class="orders-count-badge" style="display:none;"></span></a>
+      <a href="wishlist.html" class="nav-icon-btn wishlist-icon" aria-label="Wishlist">
+        <i class="fas fa-heart"></i><span class="wishlist-count">0</span>
       </a>
-      <a href="cart.html" class="nav-icon-btn cart-icon active-page" aria-label="Cart" style="position:relative">
-        <i class="fas fa-shopping-bag"></i>
-        <span class="cart-count">0</span>
+      <a href="cart.html" class="nav-icon-btn cart-icon active-page" aria-label="Cart">
+        <i class="fas fa-shopping-bag"></i><span class="cart-count">0</span>
       </a>
     </div>
-    <div class="hamburger"><span></span><span></span><span></span></div>
+    <div class="hamburger" aria-label="Menu"><span></span><span></span><span></span></div>
   </div>
 </nav>
-<div class="mobile-menu">
-  <a href="index.html">Home</a>
-  <a href="shop.html">Shop</a>
-  <a href="index.html#about-section">About</a>
-  <a href="index.html#contact-section">Contact</a>
-  <a href="wishlist.html">Wishlist</a>
-  <a href="cart.html">Cart</a>
+<div class="mobile-menu" id="mobileMenu">
+  <form class="mobile-menu-search" action="search.html" method="get" role="search">
+    <i class="fas fa-search"></i>
+    <input type="search" name="q" placeholder="Search styles…" autocomplete="off" />
+  </form>
+  <a href="index.html"><i class="fas fa-home"></i> Home</a>
+  <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+  <a href="index.html#about-section"><i class="fas fa-info-circle"></i> About</a>
+  <a href="index.html#contact-section"><i class="fas fa-envelope"></i> Contact</a>
+  <a href="track-order.html"><i class="fas fa-box"></i> Track Order</a>
+  <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+  <a href="cart.html" class="active"><i class="fas fa-shopping-bag"></i> Cart</a>
 </div>
 
 <!-- ── PAGE BANNER ── -->

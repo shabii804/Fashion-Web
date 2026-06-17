@@ -6,250 +6,286 @@
 <title>Checkout – LuxeHer</title>
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+.checkout-section { padding: 40px 0 80px; }
+.checkout-layout  { display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: start; }
+.checkout-form-card { background:#fff; border-radius:var(--radius-md); border:1px solid var(--border); padding:28px 32px; margin-bottom:20px; }
+.checkout-form-card h3 { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:600; color:var(--dark); margin-bottom:22px; padding-bottom:14px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+.step-num { width:28px; height:28px; border-radius:50%; background:var(--rose); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; flex-shrink:0; }
+.checkout-row  { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.checkout-group { margin-bottom:16px; }
+.checkout-group label { display:block; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--light-text); margin-bottom:7px; }
+.checkout-group input,
+.checkout-group select,
+.checkout-group textarea { width:100%; padding:11px 14px; background:#fff; border:1.5px solid var(--border); border-radius:8px; font-family:inherit; font-size:0.84rem; color:var(--dark); outline:none; transition:border-color .25s, box-shadow .25s; }
+.checkout-group input:focus,
+.checkout-group select:focus,
+.checkout-group textarea:focus { border-color:var(--rose); box-shadow:0 0 0 3px rgba(201,132,143,.15); }
+.checkout-group input::placeholder,
+.checkout-group textarea::placeholder { color:#bbb; }
+.checkout-group textarea { resize:none; height:80px; }
+/* Payment Methods */
+.payment-methods { display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+.payment-method {
+  flex:1; min-width:120px; padding:14px 12px;
+  border:2px solid var(--border); border-radius:10px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:8px; cursor:pointer; transition:all .25s;
+  font-size:0.78rem; font-weight:600; color:var(--text); text-align:center;
+}
+.payment-method i { font-size:1.5rem; }
+.payment-method:hover { border-color:var(--rose); color:var(--rose); background:rgba(201,132,143,.04); }
+.payment-method.active { border-color:var(--rose); background:rgba(201,132,143,.07); color:var(--rose); }
+.payment-method .pm-desc { font-size:0.68rem; font-weight:400; color:var(--light-text); }
+/* COD badge */
+.cod-info { background:var(--beige); border:1px solid var(--border); border-radius:8px; padding:14px 16px; font-size:0.82rem; color:var(--text); display:flex; align-items:flex-start; gap:10px; margin-top:4px; }
+.cod-info i { color:var(--rose); margin-top:2px; flex-shrink:0; }
+/* Easypaisa fields */
+.ep-info { background:#e8f5e9; border:1px solid #a5d6a7; border-radius:8px; padding:14px 16px; font-size:0.82rem; color:#2e7d32; display:flex; align-items:flex-start; gap:10px; margin-top:4px; }
+.ep-info i { margin-top:2px; flex-shrink:0; }
+/* Summary */
+.checkout-summary { background:#fff; border-radius:var(--radius-md); border:1px solid var(--border); padding:26px; position:sticky; top:78px; }
+.checkout-summary h3 { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:600; color:var(--dark); margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+.checkout-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.checkout-item-img { width:54px; height:66px; border-radius:6px; overflow:hidden; flex-shrink:0; background:var(--beige); }
+.checkout-item-img img { width:100%; height:100%; object-fit:cover; }
+.checkout-item-name { font-size:0.8rem; font-weight:600; color:var(--dark); margin-bottom:2px; }
+.checkout-item-meta { font-size:0.7rem; color:var(--light-text); }
+.checkout-item-price { font-size:0.84rem; font-weight:700; color:var(--rose); margin-left:auto; white-space:nowrap; }
+.summary-row { display:flex; justify-content:space-between; font-size:0.82rem; color:var(--text); margin-bottom:8px; }
+.summary-row.total { font-weight:700; color:var(--dark); font-size:0.96rem; padding-top:10px; border-top:1px solid var(--border); margin-top:6px; }
+.summary-row.total span:last-child { color:var(--rose); }
+.btn-place-order { width:100%; background:var(--rose); color:#fff; padding:14px; border-radius:50px; font-size:0.85rem; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; transition:all .3s; margin-top:14px; display:flex; align-items:center; justify-content:center; gap:8px; border:none; cursor:pointer; font-family:inherit; box-shadow:0 4px 16px rgba(201,132,143,.3); }
+.btn-place-order:hover { background:var(--rose-dark); transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,132,143,.4); }
+.checkout-secure { display:flex; align-items:center; justify-content:center; gap:6px; font-size:0.72rem; color:var(--light-text); margin-top:12px; }
+.checkout-secure i { color:#4caf50; }
+/* Responsive */
+@media(max-width:900px) { .checkout-layout { grid-template-columns:1fr; } .checkout-summary { position:static; } }
+@media(max-width:600px) { .checkout-row { grid-template-columns:1fr; } .checkout-form-card { padding:20px 16px; } .payment-method { min-width:100px; padding:10px 8px; } }
+</style>
 </head>
 <body>
 
-<!-- ── NAVBAR ── -->
+<!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <a href="index.html" class="nav-logo">Luxe<span>Her</span></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="shop.html">Shop</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="index.html#about-section">About</a></li>
+    <li><a href="index.html#contact-section">Contact</a></li>
   </ul>
   <div class="nav-right">
     <div class="nav-search-wrap">
-      <form class="nav-search-form" action="search.html" method="get" role="search" aria-label="Site search">
+      <form class="nav-search-form" action="search.html" method="get" role="search">
         <i class="fas fa-search nav-search-icon"></i>
-        <input class="nav-search-input" type="search" name="q" placeholder="Search styles…" autocomplete="off" spellcheck="false" aria-label="Search" />
-        <button type="submit" class="nav-search-submit" aria-label="Go"><i class="fas fa-arrow-right"></i></button>
+        <input class="nav-search-input" type="search" name="q" placeholder="Search styles…" autocomplete="off" />
+        <button type="submit" class="nav-search-submit"><i class="fas fa-arrow-right"></i></button>
       </form>
     </div>
     <div class="nav-icons">
       <a href="search.html" class="nav-icon-btn" aria-label="Search"><i class="fas fa-search"></i></a>
-      <a href="#" class="nav-icon-btn" aria-label="Account"><i class="fas fa-user"></i></a>
-      <a href="wishlist.html" class="nav-icon-btn wishlist-icon" aria-label="Wishlist">
-        <i class="fas fa-heart"></i>
-        <span class="wishlist-count">0</span>
-      </a>
-      <a href="cart.html" class="nav-icon-btn cart-icon" aria-label="Cart">
-        <i class="fas fa-shopping-bag"></i>
-        <span class="cart-count">0</span>
-      </a>
+      <a href="track-order.html" class="nav-icon-btn" aria-label="Track Order" title="Track Order"><i class="fas fa-box"></i><span class="orders-count-badge" style="display:none;"></span></a>
+      <a href="wishlist.html" class="nav-icon-btn wishlist-icon" aria-label="Wishlist"><i class="fas fa-heart"></i><span class="wishlist-count">0</span></a>
+      <a href="cart.html" class="nav-icon-btn cart-icon" aria-label="Cart"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
     </div>
     <div class="hamburger" aria-label="Menu"><span></span><span></span><span></span></div>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
+  <form class="mobile-menu-search" action="search.html" method="get"><i class="fas fa-search"></i><input type="search" name="q" placeholder="Search styles…" autocomplete="off" /></form>
   <a href="index.html"><i class="fas fa-home"></i> Home</a>
   <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
-  <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
-  <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+  <a href="index.html#about-section"><i class="fas fa-info-circle"></i> About</a>
+  <a href="index.html#contact-section"><i class="fas fa-envelope"></i> Contact</a>
+  <a href="track-order.html"><i class="fas fa-box"></i> Track Order</a>
   <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
   <a href="cart.html"><i class="fas fa-shopping-bag"></i> Cart</a>
 </div>
 
-<!-- ── PAGE BANNER ── -->
+<!-- BANNER -->
 <div class="page-banner-simple">
   <div class="breadcrumb">
-    <a href="index.html">Home</a>
-    <i class="fas fa-chevron-right"></i>
-    <a href="cart.html">Cart</a>
-    <i class="fas fa-chevron-right"></i>
+    <a href="index.html">Home</a><i class="fas fa-chevron-right"></i>
+    <a href="cart.html">Cart</a><i class="fas fa-chevron-right"></i>
     <span>Checkout</span>
   </div>
   <h1>Checkout</h1>
 </div>
 
-<!-- ── CHECKOUT SECTION ── -->
+<!-- CHECKOUT -->
 <section class="checkout-section">
   <div class="container">
     <div class="checkout-layout" id="checkout-layout">
-      <!-- Left: Forms -->
+
+      <!-- LEFT: Forms -->
       <div>
-        <!-- Shipping -->
-        <div class="checkout-form-card" style="margin-bottom: 20px;">
-          <h3><span class="step-num">1</span> Shipping Information</h3>
+        <!-- Step 1: Shipping -->
+        <div class="checkout-form-card">
+          <h3><span class="step-num">1</span> Delivery Information</h3>
           <div class="checkout-row">
             <div class="checkout-group">
-              <label>First Name</label>
-              <input type="text" placeholder="Sarah" id="firstName" required />
+              <label>First Name *</label>
+              <input type="text" id="firstName" placeholder="e.g. Ayesha" required />
             </div>
             <div class="checkout-group">
-              <label>Last Name</label>
-              <input type="text" placeholder="Johnson" id="lastName" required />
+              <label>Last Name *</label>
+              <input type="text" id="lastName" placeholder="e.g. Khan" required />
             </div>
           </div>
           <div class="checkout-group">
-            <label>Email Address</label>
-            <input type="email" placeholder="sarah@email.com" id="email" required />
+            <label>Email Address *</label>
+            <input type="email" id="email" placeholder="ayesha@example.com" required />
           </div>
           <div class="checkout-group">
-            <label>Phone Number</label>
-            <input type="tel" placeholder="+1 234 567 8900" id="phone" />
+            <label>Phone Number (Pakistan) *</label>
+            <input type="tel" id="phone" placeholder="+92 300 1234567" required />
           </div>
           <div class="checkout-group">
-            <label>Street Address</label>
-            <input type="text" placeholder="123 Fashion Street" id="address" required />
+            <label>Full Address *</label>
+            <input type="text" id="address" placeholder="House No., Street, Area" required />
           </div>
           <div class="checkout-row">
             <div class="checkout-group">
-              <label>City</label>
-              <input type="text" placeholder="New York" id="city" required />
+              <label>City *</label>
+              <select id="city" required>
+                <option value="">Select City</option>
+                <option>Karachi</option>
+                <option>Lahore</option>
+                <option>Islamabad</option>
+                <option>Rawalpindi</option>
+                <option>Faisalabad</option>
+                <option>Multan</option>
+                <option>Peshawar</option>
+                <option>Quetta</option>
+                <option>Sialkot</option>
+                <option>Gujranwala</option>
+                <option>Hyderabad</option>
+                <option>Abbottabad</option>
+                <option>Bahawalpur</option>
+                <option>Sargodha</option>
+                <option>Sukkur</option>
+                <option>Other</option>
+              </select>
             </div>
             <div class="checkout-group">
-              <label>State / Province</label>
-              <input type="text" placeholder="NY" id="state" required />
-            </div>
-          </div>
-          <div class="checkout-row">
-            <div class="checkout-group">
-              <label>ZIP / Postal Code</label>
-              <input type="text" placeholder="10001" id="zip" required />
-            </div>
-            <div class="checkout-group">
-              <label>Country</label>
-              <select id="country">
-                <option>United States</option>
-                <option>Canada</option>
-                <option>United Kingdom</option>
-                <option>Australia</option>
-                <option>Germany</option>
-                <option>France</option>
+              <label>Province *</label>
+              <select id="province" required>
+                <option value="">Select Province</option>
+                <option>Punjab</option>
+                <option>Sindh</option>
+                <option>Khyber Pakhtunkhwa</option>
+                <option>Balochistan</option>
+                <option>Islamabad Capital Territory</option>
+                <option>Azad Kashmir</option>
+                <option>Gilgit-Baltistan</option>
               </select>
             </div>
           </div>
+          <div class="checkout-group">
+            <label>Order Notes (Optional)</label>
+            <textarea id="notes" placeholder="Any special delivery instructions…"></textarea>
+          </div>
+          <!-- Country hidden — Pakistan only -->
+          <input type="hidden" id="country" value="Pakistan" />
         </div>
 
-        <!-- Payment -->
+        <!-- Step 2: Payment -->
         <div class="checkout-form-card">
           <h3><span class="step-num">2</span> Payment Method</h3>
           <div class="payment-methods">
-            <div class="payment-method active" data-method="card">
-              <i class="fas fa-credit-card"></i> Card
+            <div class="payment-method" data-method="cod" id="pm-cod">
+              <i class="fas fa-money-bill-wave"></i>
+              <span>Cash on Delivery</span>
+              <span class="pm-desc">Pay when received</span>
             </div>
-            <div class="payment-method" data-method="paypal">
-              <i class="fab fa-paypal"></i> PayPal
-            </div>
-            <div class="payment-method" data-method="apple">
-              <i class="fab fa-apple-pay"></i> Apple Pay
+            <div class="payment-method" data-method="easypaisa" id="pm-easypaisa">
+              <i class="fas fa-mobile-alt"></i>
+              <span>Easypaisa</span>
+              <span class="pm-desc">Mobile payment</span>
             </div>
           </div>
-          <div id="cardFields">
-            <div class="checkout-group">
-              <label>Card Number</label>
-              <input type="text" placeholder="1234 5678 9012 3456" id="cardNumber" maxlength="19" />
+
+          <!-- COD info -->
+          <div id="codInfo" class="cod-info">
+            <i class="fas fa-info-circle"></i>
+            <div>
+              <strong>Cash on Delivery</strong> — Pay PKR amount in cash when your order is delivered. Our rider will collect the payment at your doorstep.
             </div>
-            <div class="checkout-row">
-              <div class="checkout-group">
-                <label>Expiry Date</label>
-                <input type="text" placeholder="MM / YY" id="expiry" maxlength="7" />
+          </div>
+
+          <!-- Easypaisa info -->
+          <div id="easypaisaInfo" class="ep-info" style="display:none;">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <strong>Easypaisa Payment</strong> — Send payment to <strong>0300-1234567</strong> and enter your transaction ID below.
+              <div class="checkout-group" style="margin-top:12px; margin-bottom:0;">
+                <label>Easypaisa Transaction ID</label>
+                <input type="text" id="transactionId" placeholder="e.g. EP-123456789" />
               </div>
-              <div class="checkout-group">
-                <label>CVV</label>
-                <input type="text" placeholder="123" id="cvv" maxlength="4" />
-              </div>
-            </div>
-            <div class="checkout-group">
-              <label>Name on Card</label>
-              <input type="text" placeholder="Sarah Johnson" id="cardName" />
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Right: Order Summary -->
+      <!-- RIGHT: Summary -->
       <div class="checkout-summary">
         <h3>Order Summary</h3>
-        <div id="checkout-items">
-          <!-- Filled by JS -->
-        </div>
-        <div class="checkout-totals" id="checkout-totals">
-          <!-- Filled by JS -->
-        </div>
+        <div id="checkout-items"></div>
+        <div class="checkout-totals" id="checkout-totals"></div>
         <button class="btn-place-order" id="placeOrderBtn">
           <i class="fas fa-lock"></i> PLACE ORDER
         </button>
         <div class="checkout-secure">
-          <i class="fas fa-shield-alt"></i> Your payment is secured with SSL encryption
+          <i class="fas fa-shield-alt"></i> Secure &amp; trusted checkout
         </div>
       </div>
     </div>
 
-    <!-- Empty state -->
     <div class="cart-empty hidden" id="checkout-empty">
       <div class="empty-icon"><i class="fas fa-shopping-bag"></i></div>
       <h3>Nothing to checkout</h3>
       <p>Your cart is empty. Add some items first!</p>
-      <a href="shop.html" class="btn-primary" style="margin-top:16px; display:inline-block;">START SHOPPING</a>
+      <a href="shop.html" class="btn-primary" style="margin-top:16px;display:inline-flex;">START SHOPPING</a>
     </div>
   </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
 <footer class="site-footer">
-  <div class="footer-newsletter"><div class="container"><div class="newsletter-inner">
-    <div class="newsletter-text"><h4>Stay In The Loop</h4><p>Get the latest trends, exclusive offers &amp; style inspiration in your inbox.</p></div>
-  </div></div></div>
   <div class="footer-main"><div class="container"><div class="footer-grid">
     <div class="footer-col footer-brand">
       <a href="index.html" class="footer-logo">Luxe<span>Her</span></a>
-      <p class="footer-brand-desc">Where elegance meets everyday. Curated fashion for the modern woman who believes style is a form of self-expression.</p>
+      <p class="footer-brand-desc">Where elegance meets everyday. Curated fashion for the modern woman.</p>
       <div class="footer-socials">
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
       </div>
     </div>
     <div class="footer-col"><h5 class="footer-col-title">Quick Links</h5><ul class="footer-links">
       <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
-      <li><a href="shop.html"><i class="fas fa-chevron-right"></i> Shop All</a></li>
-      <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
-      <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
-      <li><a href="wishlist.html"><i class="fas fa-chevron-right"></i> Wishlist</a></li>
+      <li><a href="shop.html"><i class="fas fa-chevron-right"></i> Shop</a></li>
+      <li><a href="track-order.html"><i class="fas fa-chevron-right"></i> Track Order</a></li>
       <li><a href="cart.html"><i class="fas fa-chevron-right"></i> Cart</a></li>
     </ul></div>
-    <div class="footer-col"><h5 class="footer-col-title">Categories</h5><ul class="footer-links">
-      <li><a href="shop.html"><i class="fas fa-chevron-right"></i> Dresses</a></li>
-      <li><a href="shop.html"><i class="fas fa-chevron-right"></i> Handbags</a></li>
-      <li><a href="shop.html"><i class="fas fa-chevron-right"></i> Shoes</a></li>
-      <li><a href="shop.html"><i class="fas fa-chevron-right"></i> Tops &amp; Blouses</a></li>
-      <li><a href="shop.html"><i class="fas fa-chevron-right"></i> Skirts</a></li>
-      <li><a href="shop.html"><i class="fas fa-chevron-right"></i> Accessories</a></li>
-    </ul></div>
-    <div class="footer-col"><h5 class="footer-col-title">Help &amp; Info</h5><ul class="footer-links">
-      <li><a href="#"><i class="fas fa-chevron-right"></i> Size Guide</a></li>
+    <div class="footer-col"><h5 class="footer-col-title">Help</h5><ul class="footer-links">
       <li><a href="#"><i class="fas fa-chevron-right"></i> Shipping Info</a></li>
-      <li><a href="#"><i class="fas fa-chevron-right"></i> Returns &amp; Exchanges</a></li>
-      <li><a href="#"><i class="fas fa-chevron-right"></i> Track Your Order</a></li>
-      <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
-      <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+      <li><a href="#"><i class="fas fa-chevron-right"></i> Returns</a></li>
+      <li><a href="#"><i class="fas fa-chevron-right"></i> Size Guide</a></li>
     </ul></div>
-    <div class="footer-col"><h5 class="footer-col-title">Contact Us</h5>
-      <ul class="footer-contact-list">
-        <li><span class="fc-icon"><i class="fas fa-map-marker-alt"></i></span><span>123 Fashion Street,<br>New York, NY 10001</span></li>
-        <li><span class="fc-icon"><i class="fas fa-phone-alt"></i></span><span>+1 254 567 8900</span></li>
-        <li><span class="fc-icon"><i class="fas fa-envelope"></i></span><span>support@luxeher.com</span></li>
-        <li><span class="fc-icon"><i class="fas fa-clock"></i></span><span>Mon – Fri: 9am – 6pm</span></li>
-      </ul>
-      <div class="footer-payments">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/48px-Mastercard-logo.svg.png" alt="Mastercard" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/64px-Visa_Inc._logo.svg.png" alt="Visa" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/64px-PayPal.svg.png" alt="PayPal" />
-      </div>
-    </div>
+    <div class="footer-col"><h5 class="footer-col-title">Contact</h5><ul class="footer-contact-list">
+      <li><span class="fc-icon"><i class="fas fa-phone-alt"></i></span><span>+92 300 1234567</span></li>
+      <li><span class="fc-icon"><i class="fas fa-envelope"></i></span><span>support@luxeher.com</span></li>
+    </ul></div>
   </div></div></div>
   <div class="footer-bottom"><div class="container"><div class="footer-bottom-inner">
-    <p class="footer-copy">© 2025 <strong>LuxeHer</strong>. All Rights Reserved. Made with <i class="fas fa-heart" style="color:var(--rose);"></i> for elegant women.</p>
-    <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+    <p class="footer-copy">Copyright 2026 <strong>LuxeHer</strong>. All Rights Reserved.</p>
+    <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
   </div></div></div>
 </footer>
 
 <div class="toast" id="toast"></div>
-<button class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
 <script src="js/script.js"></script>
 <script src="js/checkout.js"></script>
 </body>

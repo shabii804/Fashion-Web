@@ -2255,3 +2255,56 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 768px) {
   .product-card-atc { transform: none !important; font-size: 0.7rem; padding: 9px 0; }
 }
+
+/* ══════════════════════════════════════════════════
+   FOOTER MOBILE — 2×2 grid
+══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px 20px !important;
+  }
+  .footer-col.footer-brand {
+    grid-column: 1 / -1 !important;  /* brand row spans full width */
+  }
+  /* Each pair of cols fills one row = 2×2 */
+  .footer-col:nth-child(2),
+  .footer-col:nth-child(3) { grid-column: auto; }
+  .footer-col:nth-child(4),
+  .footer-col:nth-child(5) { grid-column: auto; }
+
+  .footer-main { padding: 36px 0 24px; }
+  .footer-col-title { font-size: 0.75rem; margin-bottom: 14px; }
+  .footer-links a  { font-size: 0.76rem; }
+  .footer-brand-desc { font-size: 0.76rem; }
+}
+
+@media (max-width: 480px) {
+  /* Keep 2×2 even on very small phones */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 22px 14px !important;
+  }
+  .footer-col.footer-brand {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* ══ Orders count badge (Track Order icon) ══ */
+.orders-count-badge {
+  position: absolute;
+  top: 3px; right: 3px;
+  background: #e65100;      /* orange — "active/pending" feel */
+  color: #fff;
+  font-size: 0.5rem;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border: 2px solid #fff;
+  transition: transform 0.2s ease;
+  pointer-events: none;
+}
+.orders-count-badge.bump { animation: badgePulse 0.32s ease; }
